@@ -1,0 +1,21 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "Ce dossier contient les tests et expérimentations avec l'API KovaaK's.",
+  "main": "index.js",
+  "scripts": {
+    "find:martinique": "ts-node api-test/find-all-martinique-players.ts",
+    "build": "tsc",
+    "dev": "ts-node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@types/node": "^24.7.1",
+    "kovaaks-api-client": "^0.2.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

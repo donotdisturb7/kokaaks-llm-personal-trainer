@@ -22,7 +22,7 @@ export function Header() {
         </div>
         {/* Sous-titre informatif - pourrait être dynamique selon l'utilisateur */}
         <div className="text-sm text-gray-400">
-          Votre assistant personnel d'entraînement de visée
+          Aim Training AI - Your personal aim training assistant
         </div>
       </div>
     </header>
