@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+
+  # Backend service (to be implemented)
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - DATABASE_URL=postgresql://user:password@db:5432/aimtraining
+  #   depends_on:
+  #     - db
+
+  # Database (to be implemented)
+  # db:
+  #   image: postgres:15
+  #   environment:
+  #     - POSTGRES_DB=aimtraining
+  #     - POSTGRES_USER=user
+  #     - POSTGRES_PASSWORD=password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+
+  # Redis (to be implemented)
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+
+# volumes:
+#   postgres_data:
