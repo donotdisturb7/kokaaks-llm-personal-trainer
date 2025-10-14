@@ -83,13 +83,13 @@ class AllMartiniquePlayersFinder {
       
       foundPlayers.forEach((player, index) => {
         console.log(`\n${index + 1}. 🥇 Position globale: #${player.globalPosition}`);
-        console.log(`   👤 Nom: ${player.webappUsername || player.steamAccountName}`);
-        console.log(`   🏆 Points: ${parseInt(player.points).toLocaleString()}`);
-        console.log(`   🎯 Scénarios joués: ${player.scenariosCount}`);
-        console.log(`   ✅ Completions: ${player.completionsCount}`);
-        console.log(`   🌍 Pays: ${player.country}`);
-        console.log(`   💎 Kovaaks Plus: ${player.kovaaksPlusActive ? 'Oui' : 'Non'}`);
-        console.log(`   📈 Changement de rang: ${player.rankChange > 0 ? '+' : ''}${player.rankChange}`);
+        console.log(`   Nom: ${player.webappUsername || player.steamAccountName}`);
+        console.log(`   Points: ${parseInt(player.points).toLocaleString()}`);
+        console.log(`   Scénarios joués: ${player.scenariosCount}`);
+        console.log(`   Completions: ${player.completionsCount}`);
+        console.log(`   Pays: ${player.country}`);
+        console.log(`   Kovaaks Plus: ${player.kovaaksPlusActive ? 'Oui' : 'Non'}`);
+        console.log(`   Changement de rang: ${player.rankChange > 0 ? '+' : ''}${player.rankChange}`);
       });
 
       // Statistiques
@@ -100,10 +100,10 @@ class AllMartiniquePlayersFinder {
 
       console.log(`\n📊 STATISTIQUES:`);
       console.log(`${'='.repeat(30)}`);
-      console.log(`🥇 Meilleure position: #${bestPosition}`);
-      console.log(`🥉 Pire position: #${worstPosition}`);
-      console.log(`📈 Moyenne des points: ${avgPoints.toLocaleString()}`);
-      console.log(`🎯 Total des points: ${totalPoints.toLocaleString()}`);
+      console.log(` Meilleure position: #${bestPosition}`);
+      console.log(` Pire position: #${worstPosition}`);
+      console.log(` Moyenne des points: ${avgPoints.toLocaleString()}`);
+      console.log(` Total des points: ${totalPoints.toLocaleString()}`);
 
     } else {
     console.log(`\n❌ Aucun joueur de Martinique trouvé dans les ${totalPlayersChecked} premiers joueurs.`);
