@@ -1,112 +1,123 @@
-# 📊 État du Projet - KovaaK's AI Personal Trainer
+# 📊 KovaaK's AI Personal Trainer - État du Projet
 
-**Date**: 9 Octobre 2025  
-**Version**: 0.1.0 - MVP en développement
+**Date**: 14 Octobre 2025  
+**Version**: 0.2.0
 
-## 🎯 Objectif du Projet
+## 🎯 Objectif
 
-Créer un assistant IA personnel spécialisé dans l'entraînement aim training pour KovaaK's FPS Aim Trainer. L'IA utilise un LLM local (Ollama) et peut analyser les statistiques du joueur pour fournir des conseils personnalisés.
+Assistant IA personnel spécialisé dans l'entraînement aim training pour KovaaK's. L'IA analyse les statistiques du joueur et fournit des conseils personnalisés. Future intégration de fine-tuning avec documentation aim training (méthodes, théories, techniques).
 
 ---
 
-## ✅ Ce qui est FAIT
+## ✅ Fonctionnalités Complétées
 
 ### 🎨 Frontend (Next.js 14 + TypeScript)
-- ✅ Structure de base avec App Router
-- ✅ Interface de chat moderne (thème noir)
-- ✅ Architecture modulaire avec composants séparés
-  - Header, Sidebar, MainContent, AppLayout
-  - ChatInterface, ChatInput, ChatMessage
-  - ExercisesTab, ExerciseCard
-  - Composants UI réutilisables (Button, Input, Textarea)
+- ✅ Interface de chat moderne
 - ✅ Système de tabs (Chat, Exercices, Stats, Paramètres)
-- ✅ Commentaires en français
-- ✅ Design responsive et moderne
-- ✅ Tailwind CSS + shadcn/ui
+- ✅ Composants modulaires (Header, Sidebar, ChatInterface, etc.)
+- ✅ Tailwind CSS + Radix UI
+- ✅ Architecture propre et scalable
 
 ### 🔧 Backend (FastAPI + Python)
-- ✅ Structure complète du backend
-- ✅ Configuration modulaire avec variables d'environnement
-- ✅ Service Ollama avec connexion modulaire (localhost/IP)
-- ✅ API REST pour le chat
-  - POST `/api/chat/message` - Envoyer un message
-  - POST `/api/chat/conversation` - Conversation complète
-  - GET `/api/chat/health` - Vérifier Ollama
-  - GET `/api/chat/models` - Lister les modèles
-- ✅ Système de prompts spécialisés pour l'aim training
-- ✅ Gestion d'erreurs et logging
-- ✅ CORS configuré pour le frontend
+- ✅ API REST complète
+- ✅ Intégration LLM (Groq + Ollama)
+- ✅ Service Groq avec gestion d'erreurs
+- ✅ Endpoints chat, stats, exercices, contexte LLM
 - ✅ Documentation automatique (Swagger/ReDoc)
-- ✅ Script de test de connexion Ollama
+- ✅ Configuration modulaire avec variables d'env
 
-### 🧪 Tests & Expérimentation
-- ✅ Script pour trouver les joueurs de Martinique dans le leaderboard global
-- ✅ Tests de l'API KovaaK's avec `kovaaks-api-client`
-- ✅ Nettoyage des scripts de test inutiles
-- ✅ Configuration TypeScript pour les tests
+### 🗄️ Base de Données (PostgreSQL + Alembic)
+- ✅ Migrations Alembic configurées
+- ✅ Modèles SQLAlchemy:
+  - `Conversation` - Historique des chats
+  - `LocalStats` - Stats CSV uploadées
+  - `TrainingExample`, `Dataset`, `DatasetExample` - Fine-tuning
+- ✅ Indexes optimisés (GIN pour JSONB)
+- ✅ Relations et contraintes
 
-### 📦 Infrastructure
-- ✅ Docker Compose pour le développement
-- ✅ Structure de fichiers organisée
-- ✅ README pour chaque partie du projet
-- ✅ Fichiers de configuration (.env.example)
+### 💾 Cache (Redis)
+- ✅ Cache versionné pour stats
+- ✅ Invalidation automatique
+- ✅ TTL configurables par type de donnée
+- ✅ Service cache unifié
+
+### 🎮 Intégration KovaaK's API
+- ✅ **Proxy Node.js** utilisant `kovaaks-api-client` (wrapper officiel)
+- ✅ Récupération profils, scenarios, highscores, benchmarks
+- ✅ Leaderboard global
+- ✅ Cache intelligent
+
+### 🐳 Infrastructure Docker
+- ✅ **5 services** orchestrés:
+  - Frontend (Next.js)
+  - Backend (FastAPI)
+  - KovaaK's Proxy (Node.js)
+  - PostgreSQL
+  - Redis
+- ✅ Healthchecks sur tous les services
+- ✅ Réseau dédié
+- ✅ Volumes persistants
+- ✅ Scripts de démarrage automatisé
+- ✅ Makefile avec 20+ commandes
+
+### 🧪 Tests & Scripts
+- ✅ Tests API KovaaK's
+- ✅ Script recherche joueurs Martinique
+- ✅ Tests cache versionné
+- ✅ Tests connexion Ollama/Groq
 
 ---
 
 ## 🚧 En Cours / À Faire
 
 ### 🔴 Priorité Haute
-- ⏳ **Connexion Ollama** - Ollama doit être installé et démarré
-- ⏳ **Intégration Frontend <-> Backend** - Connecter l'interface au backend
-- ⏳ **Authentification** - Système de login utilisateur
-- ⏳ **Base de données** - PostgreSQL pour stocker les données
+- ⏳ Upload et parsing des stats CSV KovaaK's
+- ⏳ Analyse automatique des performances
+- ⏳ Recommandations personnalisées basées sur les stats
+- ⏳ Connexion complète Frontend ↔ Backend
 
 ### 🟡 Priorité Moyenne
-- ⏳ **Analyse des stats KovaaK's** - Parser les fichiers dans `/stats`
-- ⏳ **Fine-tuning du modèle** - Entraîner le LLM sur des données d'aim training
-- ⏳ **Système de recommandation** - Suggérer des exercices personnalisés
-- ⏳ **Visualisation des stats** - Graphiques et progression
-- ⏳ **Historique des conversations** - Sauvegarder les chats
+- ⏳ Fine-tuning du modèle LLM sur données aim training
+- ⏳ Système de datasets pour curation
+- ⏳ Visualisation des stats (graphiques)
+- ⏳ Historique et recherche dans les conversations
+- ⏳ Export des données au format JSONL
 
 ### 🟢 Fonctionnalités Futures
-- ⏳ **Intégration API KovaaK's** - Récupérer les stats en temps réel
-- ⏳ **Analyse vidéo** - Analyser des clips de gameplay
-- ⏳ **Mode coach** - Plan d'entraînement personnalisé
-- ⏳ **Communauté** - Comparer avec d'autres joueurs
-- ⏳ **Multi-langues** - Support FR/EN
+- ⏳ Analyse vidéo de gameplay
+- ⏳ Plan d'entraînement personnalisé
+- ⏳ Comparaison avec autres joueurs
+- ⏳ Multi-langues (FR/EN)
+- ⏳ Mode coach avec suivi progression
 
 ---
 
-## 📁 Structure du Projet
+## 📁 Structure
 
 ```
-finetune-project/
-├── frontend/           # Next.js 14 + TypeScript + Tailwind
-│   ├── src/
-│   │   ├── app/       # Pages et layouts
-│   │   ├── components/ # Composants React modulaires
-│   │   └── lib/       # Utilitaires
-│   └── package.json
+kokaaks-llm-personal-trainer/
+├── frontend/              # Next.js 14
+│   └── src/
+│       ├── app/          # Pages
+│       └── components/   # Composants React
 │
-├── backend/           # FastAPI + Python
+├── backend/              # FastAPI
 │   ├── app/
-│   │   ├── api/       # Routes API
-│   │   ├── services/  # Services (Ollama, etc.)
-│   │   ├── config.py  # Configuration
-│   │   └── main.py    # Application FastAPI
-│   ├── run.py         # Script de lancement
-│   ├── test_ollama.py # Test de connexion
-│   └── requirements.txt
+│   │   ├── api/         # Endpoints
+│   │   ├── models/      # SQLAlchemy models
+│   │   └── services/    # Services (LLM, Cache, Stats)
+│   └── alembic/         # Migrations DB
 │
-├── test/              # Tests et expérimentations
-│   └── api-test/
-│       └── find-all-martinique-players.ts
+├── kovaaks-proxy/        # Proxy Node.js
+│   └── src/
+│       └── server.ts    # API proxy vers KovaaK's
 │
-├── ml/                # Machine Learning (vide pour l'instant)
-├── data/              # Données d'entraînement (vide)
-├── docs/              # Documentation (vide)
-└── docker-compose.yml # Configuration Docker
-
+├── test/                 # Tests
+│   └── api-test/        # Tests API KovaaK's
+│
+├── docker-compose.yml    # Configuration Docker
+├── Makefile             # Commandes utiles
+└── .env                 # Configuration
 ```
 
 ---
@@ -114,90 +125,100 @@ finetune-project/
 ## 🔧 Stack Technique
 
 ### Frontend
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS + shadcn/ui
-- **State**: React Hooks (Zustand à venir)
-- **API**: Fetch/Axios
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS + shadcn/ui
 
 ### Backend
-- **Framework**: FastAPI
-- **Language**: Python 3.11+
-- **LLM**: Ollama (local)
-- **Database**: PostgreSQL (à venir)
-- **Cache**: Redis (à venir)
-- **Jobs**: Celery (à venir)
+- FastAPI (Python 3.11+)
+- PostgreSQL 15
+- Redis 7
+- Alembic (migrations)
+
+### LLM
+- Groq (Llama 3.3 70B) - Cloud
+- Ollama - Local (optionnel)
+
+### API KovaaK's
+- Node.js + Express
+- kovaaks-api-client (wrapper officiel)
 
 ### DevOps
-- **Containerization**: Docker + Docker Compose
-- **Version Control**: Git + GitHub
-- **CI/CD**: À venir
+- Docker + Docker Compose
+- 5 services orchestrés
+- Healthchecks automatiques
+- Volumes persistants
 
 ---
 
-## 📊 Statistiques
+## 📊 Statistiques KovaaK's
 
-- **5** joueurs de Martinique trouvés dans le top 100,000 KovaaK's
-  1. Twitter @deeway92_ - #6,897
-  2. M1SIA - #71,640
-  3. dylann - #75,379
-  4. pqzrc - #96,852 <-- moi
-  5. elo slingshot - #99,575
+**Joueurs Martinique trouvés** (top 100k):
+1. @deeway92_ - #6,897
+2. M1SIA - #71,640
+3. dylann - #75,379
+4. **pqzrc** - #96,852 ← moi
+5. elo slingshot - #99,575
 
-
-
----
-
-## 🚀 Prochaines Étapes
-
-1. **Installer Ollama** et télécharger un modèle
-   ```bash
-   curl -fsSL https://ollama.com/install.sh | sh
-   ollama pull llama2
-   ollama serve
-   ```
-
-2. **Tester le backend**
-   ```bash
-   cd backend
-   python test_ollama.py  # Vérifier la connexion
-   python run.py          # Démarrer l'API
-   ```
-
-3. **Connecter le frontend au backend**
-   - Créer un service API dans le frontend
-   - Remplacer les réponses mockées par de vraies requêtes
-
-4. **Implémenter l'analyse des stats**
-   - Parser les fichiers CSV de KovaaK's
-   - Extraire les métriques importantes
-   - Intégrer dans les prompts IA
+**Mon setup**:
+- Mouse: OP1 8k V2
+- Monitor: ASUS ROG Strix OLED XG27AQDMG
+- Mousepad: Walhack SP-004
+- DPI: 800 | FOV: 103
+- Scénarios joués: 2007
 
 ---
 
-## 💡 Notes Importantes
+## 🚀 Démarrage
 
-- **Ollama doit tourner en local** ou sur un serveur accessible
-- **Configuration modulaire** : facile de changer l'IP d'Ollama
-- **Architecture propre** : composants réutilisables, séparation des préoccupations
-- **Tests inclus** : scripts pour vérifier que tout fonctionne
+```bash
+# 1. Configuration
+cp .env.docker .env
+# Éditer .env avec GROQ_API_KEY
+
+# 2. Lancer
+./docker-start.sh
+# ou
+make up
+
+# 3. Accéder
+# Frontend: http://localhost:3000
+# Backend: http://localhost:8000/docs
+# Proxy: http://localhost:9000/health
+```
+
+---
+
+## 💡 Points Clés
+
+- **Architecture microservices** avec Docker
+- **Cache versionné** pour invalidation instantanée
+- **Proxy Node.js** pour utiliser le wrapper officiel KovaaK's
+- **Migrations DB** pour évolution du schéma
+- **Stack moderne** et scalable
+- **Modulaire** - facile d'ajouter des features
 
 ---
 
 ## 📝 Changelog
 
+### [0.2.0] - 2025-10-14
+- ✅ Architecture Docker complète (5 services)
+- ✅ Proxy Node.js pour API KovaaK's
+- ✅ Cache Redis versionné
+- ✅ Base PostgreSQL avec Alembic
+- ✅ Modèles pour fine-tuning
+- ✅ Scripts et Makefile
+- ✅ Tests intégration API KovaaK's
+
 ### [0.1.0] - 2025-10-09
-- ✅ Création de la structure frontend complète
-- ✅ Création de la structure backend complète
-- ✅ Configuration Ollama modulaire
-- ✅ Interface de chat fonctionnelle (UI seulement)
-- ✅ API REST pour le chat avec l'IA
-- ✅ Tests de l'API KovaaK's
-- ✅ Script pour analyser le leaderboard global
-- ✅ Nettoyage et organisation du code
+- ✅ Structure frontend/backend
+- ✅ Interface chat
+- ✅ Intégration Ollama/Groq
+- ✅ Tests API KovaaK's
 
 ---
 
 **Auteur**: pqzrc  
-**Projet**: BUT Informatique  
+**Projet**: BUT Informatique 3  
 **GitHub**: https://github.com/donotdisturb7/kokaaks-llm-personal-trainer

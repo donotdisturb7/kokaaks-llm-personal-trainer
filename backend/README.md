@@ -1,124 +1,104 @@
 # Backend - KovaaK's AI Personal Trainer
 
-Backend FastAPI pour l'assistant IA d'entraînement de visée avec connexion modulaire à Ollama.
+Backend FastAPI pour l'assistant IA d'entraînement aim training.
 
-## 🚀 Démarrage rapide
+## Stack
 
-### 1. Installation des dépendances
+- **FastAPI** (Python 3.11+)
+- **PostgreSQL** - Base de données
+- **Redis** - Cache
+- **Alembic** - Migrations
+- **Groq/Ollama** - LLM
+
+## Installation
 
 ```bash
-cd backend
+# Créer l'environnement virtuel
+python -m venv env
+source env/bin/activate  # Linux/Mac
+# ou
+env\Scripts\activate     # Windows
+
+# Installer les dépendances
 pip install -r requirements.txt
 ```
 
-### 2. Configuration
-
-Copiez le fichier d'exemple et configurez vos paramètres :
+## Configuration
 
 ```bash
 cp env.example .env
 ```
 
-Éditez le fichier `.env` pour configurer :
-
+Éditer `.env`:
 ```env
-# Configuration Ollama - modulaire pour localhost ou IP
-OLLAMA_HOST=localhost          # ou une IP distante
-OLLAMA_PORT=11434
-OLLAMA_MODEL=llama2           # ou votre modèle préféré
-OLLAMA_TIMEOUT=30
+# Base de données
+DATABASE_URL=postgresql+asyncpg://kovaaks:kovaaks_pass@localhost:5433/kovaaks_ai
+REDIS_URL=redis://localhost:6379/0
 
-# Configuration API
-API_HOST=0.0.0.0
-API_PORT=8000
+# LLM
+LLM_PROVIDER=groq  # ou ollama
+GROQ_API_KEY=votre_clé_ici
+
+# API
 API_DEBUG=true
+API_PORT=8000
 ```
 
-### 3. Test de connexion Ollama
+## Démarrage
 
 ```bash
-python test_ollama.py
-```
+# Démarrer les services (PostgreSQL, Redis)
+# Via Docker ou local
 
-### 4. Démarrage de l'API
+# Migrations
+alembic upgrade head
 
-```bash
+# Lancer l'API
 python run.py
 ```
 
-L'API sera accessible sur : http://localhost:8000
-Documentation : http://localhost:8000/docs
+API disponible sur http://localhost:8000  
+Documentation: http://localhost:8000/docs
 
-## 🔧 Configuration Ollama
-
-### Connexion locale
-```env
-OLLAMA_HOST=localhost
-OLLAMA_PORT=11434
-```
-
-### Connexion distante
-```env
-OLLAMA_HOST=192.168.1.100    # IP de votre serveur Ollama
-OLLAMA_PORT=11434
-```
-
-## 📡 Endpoints API
-
-### Chat avec l'IA
-- `POST /api/chat/message` - Envoyer un message
-- `POST /api/chat/conversation` - Conversation complète
-- `GET /api/chat/health` - Vérifier la connexion Ollama
-- `GET /api/chat/models` - Lister les modèles disponibles
-
-### Santé de l'API
-- `GET /health` - Statut de l'API
-- `GET /` - Informations générales
-
-## 🏗️ Architecture
+## Structure
 
 ```
-backend/
-├── app/
-│   ├── __init__.py
-│   ├── main.py              # Application FastAPI
-│   ├── config.py            # Configuration et variables d'env
-│   ├── api/
-│   │   ├── __init__.py
-│   │   └── chat.py          # Routes pour le chat
-│   └── services/
-│       ├── __init__.py
-│       └── ollama_service.py # Service Ollama modulaire
-├── requirements.txt
-├── env.example
-├── run.py                   # Script de lancement
-├── test_ollama.py          # Test de connexion
-└── README.md
+app/
+├── api/              # Endpoints REST
+│   ├── chat.py      # Chat avec IA
+│   ├── stats.py     # Stats KovaaK's
+│   ├── exercises.py # Exercices
+│   └── llm_context.py
+├── models/          # Modèles SQLAlchemy
+├── services/        # Services
+│   ├── llm_service.py
+│   ├── cache_service.py
+│   └── kovaaks_service.py
+└── database.py      # Configuration DB
 ```
 
-## 🔍 Fonctionnalités
+## Endpoints
 
-- ✅ Connexion modulaire Ollama (localhost/IP)
-- ✅ API REST avec FastAPI
-- ✅ Gestion des erreurs
-- ✅ Logging configuré
-- ✅ CORS configuré
-- ✅ Documentation automatique
-- ✅ Tests de connexion
-- ✅ Conseils spécialisés aim training
+- `POST /api/chat/message` - Chat avec l'IA
+- `POST /api/stats/upload` - Upload CSV stats
+- `GET /api/stats/history` - Historique stats
+- `GET /api/exercises` - Liste exercices
+- `GET /api/kovaaks/profile/:username` - Profil KovaaK's
+- `GET /health` - Santé de l'API
 
-## 🐛 Dépannage
+## Migrations
 
-### Ollama non accessible
-1. Vérifiez qu'Ollama est démarré : `ollama serve`
-2. Vérifiez la configuration dans `.env`
-3. Testez la connexion : `python test_ollama.py`
+```bash
+# Créer une migration
+alembic revision -m "description"
 
-### Modèle non trouvé
-1. Téléchargez un modèle : `ollama pull llama2`
-2. Vérifiez les modèles disponibles : `ollama list`
+# Appliquer
+alembic upgrade head
 
-### Erreurs de connexion
-1. Vérifiez le firewall
-2. Vérifiez l'IP et le port
-3. Testez avec curl : `curl http://localhost:11434/api/tags`
+# Rollback
+alembic downgrade -1
+```
+
+## Docker
+
+Le backend est automatiquement lancé via `docker-compose up`.
