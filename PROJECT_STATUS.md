@@ -1,123 +1,101 @@
-# 📊 KovaaK's AI Personal Trainer - État du Projet
+# 📊 État du Projet - KovaaK's AI Personal Trainer
 
-**Date**: 14 Octobre 2025  
-**Version**: 0.2.0
+**Date**: 15 Janvier 2025
+**Version**: 0.1.0
 
-## 🎯 Objectif
+## 🎯 Objectif du Projet
 
-Assistant IA personnel spécialisé dans l'entraînement aim training pour KovaaK's. L'IA analyse les statistiques du joueur et fournit des conseils personnalisés. Future intégration de fine-tuning avec documentation aim training (méthodes, théories, techniques).
+Assistant IA personnel pour l'entraînement aim training sur KovaaK's FPS Aim Trainer. L'application permet aux joueurs d'obtenir des conseils personnalisés, des programmes d'entraînement et des analyses de performance via une interface de chat intuitive.
 
 ---
 
-## ✅ Fonctionnalités Complétées
+## ✅ Ce qui est FAIT
 
-### 🎨 Frontend (Next.js 14 + TypeScript)
-- ✅ Interface de chat moderne
-- ✅ Système de tabs (Chat, Exercices, Stats, Paramètres)
-- ✅ Composants modulaires (Header, Sidebar, ChatInterface, etc.)
-- ✅ Tailwind CSS + Radix UI
-- ✅ Architecture propre et scalable
+### Frontend (Next.js + TypeScript)
+- ✅ Interface de chat avec l'IA fonctionnelle
+- ✅ Système de navigation par tabs (Chat, Artifacts, Stats, Settings)
+- ✅ Composants UI réutilisables (Button, Input, Textarea, etc.)
+- ✅ Gestion d'état avec React Context (ChatContext)
+- ✅ Intégration API backend pour communication IA
+- ✅ Design responsive avec Tailwind CSS
+- ✅ Scroll automatique dans le chat
+- ✅ Animation de typing pour les réponses IA
+- ✅ Gestion des erreurs et états de chargement
 
-### 🔧 Backend (FastAPI + Python)
-- ✅ API REST complète
+### Backend (FastAPI + Python)
+- ✅ API REST complète avec FastAPI
 - ✅ Intégration LLM (Groq + Ollama)
-- ✅ Service Groq avec gestion d'erreurs
-- ✅ Endpoints chat, stats, exercices, contexte LLM
-- ✅ Documentation automatique (Swagger/ReDoc)
-- ✅ Configuration modulaire avec variables d'env
+- ✅ Base de données PostgreSQL avec SQLAlchemy
+- ✅ Système de cache Redis versionné
+- ✅ Migrations DB avec Alembic
+- ✅ Services modulaires (LLM, Cache, KovaaK's)
+- ✅ API KovaaK's via proxy Node.js
+- ✅ Système RAG pour documents PDF
+- ✅ Embeddings avec FastEmbed
 
-### 🗄️ Base de Données (PostgreSQL + Alembic)
-- ✅ Migrations Alembic configurées
-- ✅ Modèles SQLAlchemy:
-  - `Conversation` - Historique des chats
-  - `LocalStats` - Stats CSV uploadées
-  - `TrainingExample`, `Dataset`, `DatasetExample` - Fine-tuning
-- ✅ Indexes optimisés (GIN pour JSONB)
-- ✅ Relations et contraintes
+### Infrastructure
+- ✅ Architecture Docker complète
+- ✅ Docker Compose avec tous les services
+- ✅ Proxy Node.js pour API KovaaK's
+- ✅ Configuration d'environnement
+- ✅ Scripts de démarrage automatisés
 
-### 💾 Cache (Redis)
-- ✅ Cache versionné pour stats
-- ✅ Invalidation automatique
-- ✅ TTL configurables par type de donnée
-- ✅ Service cache unifié
-
-### 🎮 Intégration KovaaK's API
-- ✅ **Proxy Node.js** utilisant `kovaaks-api-client` (wrapper officiel)
-- ✅ Récupération profils, scenarios, highscores, benchmarks
-- ✅ Leaderboard global
-- ✅ Cache intelligent
-
-### 🐳 Infrastructure Docker
-- ✅ **5 services** orchestrés:
-  - Frontend (Next.js)
-  - Backend (FastAPI)
-  - KovaaK's Proxy (Node.js)
-  - PostgreSQL
-  - Redis
-- ✅ Healthchecks sur tous les services
-- ✅ Réseau dédié
-- ✅ Volumes persistants
-- ✅ Scripts de démarrage automatisé
-- ✅ Makefile avec 20+ commandes
-
-### 🧪 Tests & Scripts
-- ✅ Tests API KovaaK's
-- ✅ Script recherche joueurs Martinique
-- ✅ Tests cache versionné
-- ✅ Tests connexion Ollama/Groq
+### Fonctionnalités Core
+- ✅ Chat avec IA spécialisée aim training
+- ✅ Récupération profils KovaaK's
+- ✅ Système d'artifacts (programmes d'entraînement)
+- ✅ Gestion des conversations
+- ✅ Upload et traitement de PDFs
+- ✅ Recherche vectorielle RAG
 
 ---
 
 ## 🚧 En Cours / À Faire
 
 ### 🔴 Priorité Haute
-- ⏳ Upload et parsing des stats CSV KovaaK's
-- ⏳ Analyse automatique des performances
-- ⏳ Recommandations personnalisées basées sur les stats
-- ⏳ Connexion complète Frontend ↔ Backend
+- ⏳ **Tab Settings** - Interface de configuration complète
+- ⏳ **Tab Stats** - Tableau de bord avec statistiques détaillées
+- ⏳ **Import PDF** - Interface d'upload et gestion des documents
+- ⏳ **RAG Fine-tuning** - Optimisation des réponses basées sur les documents
+- ⏳ **Formatage LLM** - Nettoyage des réponses (supprimer **, *, ||, -, etc.)
 
 ### 🟡 Priorité Moyenne
-- ⏳ Fine-tuning du modèle LLM sur données aim training
-- ⏳ Système de datasets pour curation
-- ⏳ Visualisation des stats (graphiques)
-- ⏳ Historique et recherche dans les conversations
-- ⏳ Export des données au format JSONL
+- ⏳ **Analyse CSV** - Upload et analyse des stats KovaaK's
+- ⏳ **Recommandations personnalisées** - Basées sur les performances
+- ⏳ **Système de progression** - Suivi des améliorations
+- ⏳ **Export des programmes** - Téléchargement des routines d'entraînement
 
-### 🟢 Fonctionnalités Futures
-- ⏳ Analyse vidéo de gameplay
-- ⏳ Plan d'entraînement personnalisé
-- ⏳ Comparaison avec autres joueurs
-- ⏳ Multi-langues (FR/EN)
-- ⏳ Mode coach avec suivi progression
+### 🟢 Fonctionnalités Futures / Nice to Have
+- ⏳ **Fine-tuning du modèle** - Personnalisation pour l'utilisateur
+- ⏳ **Comparaison de performances** - Avant/après entraînement
+- ⏳ **Système de badges** - Récompenses pour les objectifs
+- ⏳ **Mode compétition** - Défis entre utilisateurs
 
 ---
 
-## 📁 Structure
+## 📁 Structure du Projet
 
 ```
 kokaaks-llm-personal-trainer/
-├── frontend/              # Next.js 14
-│   └── src/
-│       ├── app/          # Pages
-│       └── components/   # Composants React
-│
-├── backend/              # FastAPI
+├── frontend/                    # Next.js 15 + TypeScript
+│   ├── src/
+│   │   ├── app/                # Pages et layout
+│   │   ├── components/         # Composants React
+│   │   │   ├── chat/          # Interface de chat
+│   │   │   ├── layout/        # Layout principal
+│   │   │   ├── artifacts/     # Gestion des documents
+│   │   │   └── ui/            # Composants UI réutilisables
+│   │   ├── contexts/          # Gestion d'état React
+│   │   └── lib/               # Utilitaires et API
+├── backend/                    # FastAPI + Python
 │   ├── app/
-│   │   ├── api/         # Endpoints
-│   │   ├── models/      # SQLAlchemy models
-│   │   └── services/    # Services (LLM, Cache, Stats)
-│   └── alembic/         # Migrations DB
-│
-├── kovaaks-proxy/        # Proxy Node.js
-│   └── src/
-│       └── server.ts    # API proxy vers KovaaK's
-│
-├── test/                 # Tests
-│   └── api-test/        # Tests API KovaaK's
-│
-├── docker-compose.yml    # Configuration Docker
-├── Makefile             # Commandes utiles
-└── .env                 # Configuration
+│   │   ├── api/               # Endpoints REST
+│   │   ├── models/            # Modèles SQLAlchemy
+│   │   └── services/          # Services métier
+│   └── alembic/               # Migrations DB
+├── kovaaks-proxy/             # Proxy Node.js pour API KovaaK's
+├── test/                      # Tests et scripts
+└── docker-compose.yml         # Configuration Docker
 ```
 
 ---
@@ -125,100 +103,109 @@ kokaaks-llm-personal-trainer/
 ## 🔧 Stack Technique
 
 ### Frontend
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS + shadcn/ui
+- **Framework**: Next.js 15.5.4
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 4
+- **State Management**: React Context API
+- **UI Components**: Radix UI + shadcn/ui
+- **Build Tool**: Turbopack
 
 ### Backend
-- FastAPI (Python 3.11+)
-- PostgreSQL 15
-- Redis 7
-- Alembic (migrations)
+- **Framework**: FastAPI 0.104+
+- **Language**: Python 3.11
+- **Database**: PostgreSQL + pgvector
+- **ORM**: SQLAlchemy 2.0
+- **Cache**: Redis 5.0
+- **Migrations**: Alembic
 
-### LLM
-- Groq (Llama 3.3 70B) - Cloud
-- Ollama - Local (optionnel)
+### LLM & AI
+- **Primary**: Groq (ultra-rapide)
+- **Fallback**: Ollama (local)
+- **Embeddings**: FastEmbed
+- **RAG**: Vector search avec pgvector
 
-### API KovaaK's
-- Node.js + Express
-- kovaaks-api-client (wrapper officiel)
-
-### DevOps
-- Docker + Docker Compose
-- 5 services orchestrés
-- Healthchecks automatiques
-- Volumes persistants
-
----
-
-## 📊 Statistiques KovaaK's
-
-**Joueurs Martinique trouvés** (top 100k):
-1. @deeway92_ - #6,897
-2. M1SIA - #71,640
-3. dylann - #75,379
-4. **pqzrc** - #96,852 ← moi
-5. elo slingshot - #99,575
-
-**Mon setup**:
-- Mouse: OP1 8k V2
-- Monitor: ASUS ROG Strix OLED XG27AQDMG
-- Mousepad: Walhack SP-004
-- DPI: 800 | FOV: 103
-- Scénarios joués: 2007
+### DevOps / Infrastructure
+- **Containerization**: Docker + Docker Compose
+- **Proxy**: Node.js pour API KovaaK's
+- **Environment**: Linux (Arch)
 
 ---
 
-## 🚀 Démarrage
+## 📊 Statistiques
 
-```bash
-# 1. Configuration
-cp .env.docker .env
-# Éditer .env avec GROQ_API_KEY
-
-# 2. Lancer
-./docker-start.sh
-# ou
-make up
-
-# 3. Accéder
-# Frontend: http://localhost:3000
-# Backend: http://localhost:8000/docs
-# Proxy: http://localhost:9000/health
-```
+- **Fichiers**: 24,035 fichiers (incluant node_modules)
+- **Lignes de code**: ~244,000 lignes (estimation)
+- **Commits**: 8 commits effectués
+- **Durée**: ~2 semaines de développement
+- **Tests**: 0% de couverture (à implémenter)
 
 ---
 
-## 💡 Points Clés
+## 🚀 Prochaines Étapes
 
-- **Architecture microservices** avec Docker
-- **Cache versionné** pour invalidation instantanée
-- **Proxy Node.js** pour utiliser le wrapper officiel KovaaK's
-- **Migrations DB** pour évolution du schéma
-- **Stack moderne** et scalable
-- **Modulaire** - facile d'ajouter des features
+1. **Tab Settings - Configuration IA**
+   - Interface pour configurer le modèle LLM
+   - Paramètres de température, max_tokens
+   - Gestion des clés API
+   - Résultat attendu: Configuration complète de l'IA
+
+2. **Tab Stats - Tableau de bord**
+   - Affichage des statistiques KovaaK's
+   - Graphiques de progression
+   - Comparaisons de performance
+   - Résultat attendu: Dashboard complet
+
+3. **Import PDF - Gestion documents**
+   - Interface d'upload drag & drop
+   - Prévisualisation des documents
+   - Gestion des embeddings
+   - Résultat attendu: Système RAG fonctionnel
+
+4. **Formatage LLM - Nettoyage réponses**
+   - Parser pour supprimer markdown malformé
+   - Formatage cohérent des réponses
+   - Gestion des listes et structures
+   - Résultat attendu: Réponses propres et lisibles
+
+---
+
+## 💡 Notes Importantes
+
+- ⚠️ **Problème résolu**: Conflits d'imports UI (Button, Input, Textarea)
+- ⚠️ **Problème résolu**: Navigation entre tabs non fonctionnelle
+- 💭 **Architecture**: Système modulaire bien structuré
+- 🔒 **Sécurité**: Variables d'environnement pour les clés API
+- ⚡ **Performance**: Cache Redis pour optimiser les réponses
+
+---
+
+## 🎓 Apprentissages / Défis Rencontrés
+
+- **Apprentissage 1**: Radix UI nécessite une structure spécifique pour les tabs
+- **Défi 1**: Conflits de naming entre composants UI (résolu)
+- **Best practice découverte**: Utiliser des casings cohérents pour les imports
+- **Défi 2**: Gestion des états actifs/inactifs des TabsContent (résolu)
 
 ---
 
 ## 📝 Changelog
 
-### [0.2.0] - 2025-10-14
-- ✅ Architecture Docker complète (5 services)
-- ✅ Proxy Node.js pour API KovaaK's
-- ✅ Cache Redis versionné
-- ✅ Base PostgreSQL avec Alembic
-- ✅ Modèles pour fine-tuning
-- ✅ Scripts et Makefile
-- ✅ Tests intégration API KovaaK's
+### v0.1.0 - 15 Janvier 2025
+- ✅ Fix des conflits d'imports UI
+- ✅ Correction de la navigation entre tabs
+- ✅ Amélioration du scroll dans le chat
+- ✅ Ajout du ChatContext pour la gestion d'état
+- ✅ Intégration API backend
+- ✅ Composants UI standardisés
 
-### [0.1.0] - 2025-10-09
-- ✅ Structure frontend/backend
-- ✅ Interface chat
-- ✅ Intégration Ollama/Groq
-- ✅ Tests API KovaaK's
+### v0.0.1 - Début Janvier 2025
+- ✅ Architecture de base Docker
+- ✅ Backend FastAPI avec LLM
+- ✅ Frontend Next.js de base
+- ✅ Intégration KovaaK's API
 
 ---
 
-**Auteur**: pqzrc  
-**Projet**: BUT Informatique 3  
-**GitHub**: https://github.com/donotdisturb7/kokaaks-llm-personal-trainer
+**Auteur**: DND
+**Contexte**: Projet académique - 3ème année BUT Programmation Avancée
+**Repository**: kokaaks-llm-personal-trainer

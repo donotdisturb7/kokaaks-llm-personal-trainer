@@ -1,6 +1,6 @@
 "use client"
 
-import { MessageCircle, Target, BarChart3, Settings } from "lucide-react"
+import { MessageCircle, FileText, BarChart3, Settings } from "lucide-react"
 import { TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 /**
@@ -12,29 +12,29 @@ import { TabsList, TabsTrigger } from "@/components/ui/tabs"
  */
 export function Sidebar() {
   return (
-    <TabsList className="flex flex-col w-64 bg-gray-900 border-r border-gray-800 rounded-none h-full">
+    <TabsList className="flex flex-col w-64 bg-card border-r border-border rounded-none h-full p-0 gap-0">
       {/* Onglet Chat - le plus utilisé probablement */}
       <TabsTrigger 
         value="chat" 
-        className="flex items-center gap-3 justify-start px-4 py-3 w-full data-[state=active]:bg-gray-800 data-[state=active]:text-white"
+        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
       >
         <MessageCircle className="h-5 w-5" />
         Chat
       </TabsTrigger>
       
-      {/* Onglet Exercices - bibliothèque d'exercices KovaaK's */}
+      {/* Onglet Artifacts - feuilles générées par l'IA */}
       <TabsTrigger 
-        value="exercises" 
-        className="flex items-center gap-3 justify-start px-4 py-3 w-full data-[state=active]:bg-gray-800 data-[state=active]:text-white"
+        value="artifacts" 
+        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
       >
-        <Target className="h-5 w-5" />
-        Exercices
+        <FileText className="h-5 w-5" />
+        Artifacts
       </TabsTrigger>
       
       {/* Onglet Stats - pour voir les progrès */}
       <TabsTrigger 
         value="stats" 
-        className="flex items-center gap-3 justify-start px-4 py-3 w-full data-[state=active]:bg-gray-800 data-[state=active]:text-white"
+        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
       >
         <BarChart3 className="h-5 w-5" />
         Statistiques
@@ -43,7 +43,7 @@ export function Sidebar() {
       {/* Onglet Paramètres - configuration de l'IA */}
       <TabsTrigger 
         value="settings" 
-        className="flex items-center gap-3 justify-start px-4 py-3 w-full data-[state=active]:bg-gray-800 data-[state=active]:text-white"
+        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
       >
         <Settings className="h-5 w-5" />
         Paramètres

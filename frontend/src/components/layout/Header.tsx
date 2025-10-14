@@ -1,6 +1,7 @@
 "use client"
 
 import { Target } from "lucide-react"
+import { StatusIndicator } from "@/components/StatusIndicator"
 
 /**
  * Composant Header - En-tête de l'application
@@ -11,18 +12,21 @@ import { Target } from "lucide-react"
  */
 export function Header() {
   return (
-    <header className="bg-gray-900 border-b border-gray-800 px-6 py-4">
+    <header className="bg-card border-b border-border px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {/* Logo avec icône de cible - simple mais efficace */}
-          <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <Target className="h-5 w-5 text-white" />
+          <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+            <Target className="h-5 w-5 text-primary-foreground" />
           </div>
-          <h1 className="text-xl font-bold text-white">Aim Training AI</h1>
+          <h1 className="text-xl font-bold text-foreground">KovaaK's AI Personal Trainer</h1>
         </div>
-        {/* Sous-titre informatif - pourrait être dynamique selon l'utilisateur */}
-        <div className="text-sm text-gray-400">
-          Aim Training AI - Your personal aim training assistant
+        {/* Status et informations */}
+        <div className="flex items-center gap-4">
+          <StatusIndicator />
+          {/* <div className="text-sm text-muted-foreground">
+            KovaaK's AI Personal Trainer
+          </div> */}
         </div>
       </div>
     </header>

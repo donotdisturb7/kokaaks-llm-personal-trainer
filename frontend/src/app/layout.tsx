@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ChatProvider } from "@/contexts/ChatContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,10 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={inter.className}>
-        <div className="min-h-screen bg-black text-white">
-          {children}
+        <div className="min-h-screen bg-background text-foreground">
+          <ChatProvider>
+            {children}
+          </ChatProvider>
         </div>
       </body>
     </html>

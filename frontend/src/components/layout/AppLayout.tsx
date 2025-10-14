@@ -15,7 +15,7 @@ export function AppLayout() {
       <Header />
       
       <main className="flex-1 overflow-hidden">
-        <Tabs defaultValue="chat" className="h-full flex">
+        <Tabs defaultValue="chat" className="h-full flex flex-row gap-0">
           <Sidebar />
           <MainContent />
         </Tabs>

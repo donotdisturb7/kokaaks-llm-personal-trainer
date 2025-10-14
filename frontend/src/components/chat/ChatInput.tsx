@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { Send } from "lucide-react"
-import { Textarea } from "@/components/ui/Textarea"
-import { Button } from "@/components/ui/Button"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void
