@@ -1,42 +1,132 @@
 version: '3.8'
 
 services:
+  # PostgreSQL Database
+  postgres:
+    container_name: kovaaks-postgres
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kovaaks
+      POSTGRES_PASSWORD: kovaaks_pass
+      POSTGRES_DB: kovaaks_ai
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - kovaaks-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kovaaks"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    container_name: kovaaks-redis
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - kovaaks-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    command: redis-server --appendonly yes
+
+  # KovaaK's API Proxy (using official wrapper)
+  kovaaks-proxy:
+    container_name: kovaaks-proxy
+    build:
+      context: ./kovaaks-proxy
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    networks:
+      - kovaaks-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  # Backend API
+  backend:
+    container_name: kovaaks-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://kovaaks:kovaaks_pass@postgres:5432/kovaaks_ai
+      - REDIS_URL=redis://redis:6379/0
+      - LLM_PROVIDER=${LLM_PROVIDER:-groq}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      - KOVAAKS_USERNAME=${KOVAAKS_USERNAME:-}
+      - KOVAAKS_PROXY_URL=http://kovaaks-proxy:9000
+      - API_DEBUG=true
+      - LOG_LEVEL=INFO
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kovaaks-proxy:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - backend_cache:/app/__pycache__
+    networks:
+      - kovaaks-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Frontend Next.js
   frontend:
-    build: ./frontend
+    container_name: kovaaks-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
     ports:
       - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      backend:
+        condition: service_healthy
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    environment:
-      - NODE_ENV=development
-    command: npm run dev
+      - /app/.next
+    networks:
+      - kovaaks-network
 
-  # Backend service (to be implemented)
-  # backend:
-  #   build: ./backend
-  #   ports:
-  #     - "8000:8000"
-  #   environment:
-  #     - DATABASE_URL=postgresql://user:password@db:5432/aimtraining
-  #   depends_on:
-  #     - db
+networks:
+  kovaaks-network:
+    driver: bridge
+    name: kovaaks-network
 
-  # Database (to be implemented)
-  # db:
-  #   image: postgres:15
-  #   environment:
-  #     - POSTGRES_DB=aimtraining
-  #     - POSTGRES_USER=user
-  #     - POSTGRES_PASSWORD=password
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
-
-  # Redis (to be implemented)
-  # redis:
-  #   image: redis:7-alpine
-  #   ports:
-  #     - "6379:6379"
-
-# volumes:
-#   postgres_data:
+volumes:
+  postgres_data:
+    name: kovaaks-postgres-data
+  redis_data:
+    name: kovaaks-redis-data
+  backend_cache:
+    name: kovaaks-backend-cache
