@@ -2,7 +2,8 @@
 Configuration de l'application
 Gère les variables d'environnement et la configuration Ollama
 """
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field, AliasChoices
 from typing import List, Optional
 import os
 
@@ -10,14 +11,28 @@ import os
 class Settings(BaseSettings):
     """Configuration principale de l'application"""
     
+    # Configuration du provider IA (ollama ou groq)
+    llm_provider: str = "ollama"  # "ollama" ou "groq"
+    
     # Configuration Ollama - modulaire pour localhost ou IP
     ollama_host: str = "localhost"
     ollama_port: int = 11434
     ollama_model: str = "llama2"
     ollama_timeout: int = 30
     
+    # Configuration Groq
+    groq_api_key: Optional[str] = None
+    groq_model: str = "llama-3.3-70b-versatile"
+    
+    # Configuration utilisateur KovaaK's (pour l'API)
+    # Supporte les deux variables d'env: KOVAAKS_USERNAME ou CURRENT_USER_KOVAAKS_USERNAME
+    kovaaks_username: str = Field(
+        default="",
+        validation_alias=AliasChoices("KOVAAKS_USERNAME", "CURRENT_USER_KOVAAKS_USERNAME"),
+    )
+    
     # Configuration Base de données
-    database_url: str = "postgresql://user:password@localhost:5432/kovaaks_ai"
+    database_url: str = "postgresql+asyncpg://kovaaks:kovaaks_pass@localhost:5433/kovaaks_ai"
     database_echo: bool = False
     
     # Configuration Redis
@@ -31,17 +46,23 @@ class Settings(BaseSettings):
     # Configuration CORS
     cors_origins: List[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
     
-    # Configuration KovaaK's API
-    kovaaks_api_base_url: str = "https://api.kovaaks.com"
-    kovaaks_api_key: Optional[str] = None
+    # Configuration KovaaK's Proxy
+    kovaaks_proxy_url: str = "http://localhost:9000"
+    
+    # Configuration Redis Cache TTL
+    redis_cache_ttl: int = 300  # 5 minutes par défaut
+    redis_stats_ttl: int = 3600  # 1 heure pour les stats
     
     # Configuration Logs
     log_level: str = "INFO"
     log_format: str = "json"
     
-    class Config:
-        env_file = ".env"
-        case_sensitive = False
+    # Pydantic v2 config
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        case_sensitive=False,
+        extra="ignore",  # ignore unknown env variables (e.g., legacy keys)
+    )
     
     @property
     def ollama_base_url(self) -> str:
