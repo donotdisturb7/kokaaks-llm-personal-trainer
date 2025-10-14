@@ -9,7 +9,7 @@ import logging
 
 from app.config import settings
 from app.database import create_tables, close_connections
-from app.api import chat, kovaaks, stats, exercises, llm_context
+from app.api import chat, kovaaks, stats, exercises, llm_context, rag
 
 # Configuration du logging
 logging.basicConfig(
@@ -60,6 +60,7 @@ app.include_router(kovaaks.router)
 app.include_router(stats.router)
 app.include_router(exercises.router)
 app.include_router(llm_context.router)
+app.include_router(rag.router)
 
 @app.get("/")
 async def root():

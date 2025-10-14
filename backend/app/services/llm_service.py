@@ -131,6 +131,47 @@ class LLMService:
             user_stats=user_stats
         )
     
+    async def generate_rag_response(
+        self,
+        query: str,
+        context: str,
+        safety_level: str = "general"
+    ) -> str:
+        """Génère une réponse RAG basée sur le contexte fourni"""
+        system_prompt = self._build_rag_system_prompt(safety_level)
+        
+        prompt = f"""Contexte fourni:
+{context}
+
+Question de l'utilisateur: {query}
+
+Réponds de manière précise et utile en te basant uniquement sur le contexte fourni. 
+Cite tes sources quand c'est pertinent. Si le contexte ne contient pas d'information suffisante, 
+dis-le clairement."""
+        
+        return await self.provider.generate_response(
+            prompt=prompt,
+            system_prompt=system_prompt
+        )
+    
+    def _build_rag_system_prompt(self, safety_level: str) -> str:
+        """Construit le prompt système pour RAG selon le niveau de sécurité"""
+        base_prompt = """Tu es un assistant spécialisé en entraînement de visée (aim training) et en prévention des blessures liées au gaming. 
+Tu fournis des conseils basés sur des sources fiables et tu es toujours prudent avec les conseils médicaux."""
+        
+        if safety_level == "medical":
+            return base_prompt + """
+IMPORTANT: Tu traites des informations médicales. Toujours recommander de consulter un professionnel de santé 
+pour tout problème de santé. Ne jamais donner de diagnostic ou de traitement médical."""
+        elif safety_level == "training":
+            return base_prompt + """
+Tu te concentres sur l'entraînement et l'amélioration des performances. 
+Sois précis sur les techniques et les exercices recommandés."""
+        else:  # general
+            return base_prompt + """
+Tu donnes des conseils généraux sur l'entraînement et le gaming. 
+Pour tout conseil médical, recommande de consulter un professionnel."""
+    
     async def close(self):
         """Ferme la connexion du provider"""
         if self._provider:

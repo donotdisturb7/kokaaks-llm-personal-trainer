@@ -4,14 +4,14 @@ services:
   # PostgreSQL Database
   postgres:
     container_name: kovaaks-postgres
-    image: postgres:15-alpine
+    image: pgvector/pgvector:pg16
     restart: unless-stopped
     environment:
       POSTGRES_USER: kovaaks
       POSTGRES_PASSWORD: kovaaks_pass
       POSTGRES_DB: kovaaks_ai
     ports:
-      - "5433:5432"
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -28,7 +28,7 @@ services:
     image: redis:7-alpine
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "6380:6379"
     volumes:
       - redis_data:/data
     networks:
@@ -66,7 +66,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - DATABASE_URL=postgresql+asyncpg://kovaaks:kovaaks_pass@postgres:5432/kovaaks_ai
       - REDIS_URL=redis://redis:6379/0
@@ -81,8 +81,6 @@ services:
       postgres:
         condition: service_healthy
       redis:
-        condition: service_healthy
-      kovaaks-proxy:
         condition: service_healthy
     volumes:
       - ./backend:/app

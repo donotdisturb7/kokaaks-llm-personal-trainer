@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     
     # Configuration Groq
     groq_api_key: Optional[str] = None
-    groq_model: str = "llama-3.3-70b-versatile"
+    groq_model: str = "openai/gpt-oss-120b"
     
     # Configuration utilisateur KovaaK's (pour l'API)
     # Supporte les deux variables d'env: KOVAAKS_USERNAME ou CURRENT_USER_KOVAAKS_USERNAME
@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     )
     
     # Configuration Base de données
-    database_url: str = "postgresql+asyncpg://kovaaks:kovaaks_pass@localhost:5433/kovaaks_ai"
+    database_url: str = "postgresql+asyncpg://kovaaks:kovaaks_pass@localhost:5434/kovaaks_ai"
     database_echo: bool = False
     
     # Configuration Redis
