@@ -2,8 +2,8 @@
 RAG Service - Orchestrates retrieval and generation
 """
 from typing import List, Dict, Any, Optional
-from sqlalchemy.orm import Session
-from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import text, select
 
 from app.models.rag import Document, DocumentChunk
 from app.services.embedding_service import EmbeddingService
@@ -12,7 +12,7 @@ from app.config import settings
 
 
 class RAGService:
-    def __init__(self, db: Session):
+    def __init__(self, db: AsyncSession):
         self.db = db
         self.embedding_service = EmbeddingService()
         self.llm_service = create_llm_service(settings)
@@ -151,7 +151,7 @@ class RAGService:
             safety=safety
         )
         self.db.add(document)
-        self.db.flush()  # Get the ID
+        await self.db.flush()  # Get the ID after INSERT
         
         # Process chunks
         chunk_objects = []
@@ -169,7 +169,7 @@ class RAGService:
             chunk_objects.append(chunk)
         
         self.db.add_all(chunk_objects)
-        self.db.commit()
+        await self.db.commit()
         
         return {
             "document_id": document.id,
@@ -183,15 +183,16 @@ class RAGService:
     ) -> List[Dict[str, Any]]:
         """List documents with optional filtering"""
         
-        query = self.db.query(Document)
+        stmt = select(Document)
         
         if doc_type:
-            query = query.filter(Document.doc_type == doc_type)
+            stmt = stmt.where(Document.doc_type == doc_type)
         
         if topics:
-            query = query.filter(Document.topics.op('?|')(topics))
+            stmt = stmt.where(Document.topics.op('?|')(topics))
         
-        documents = query.all()
+        result = await self.db.execute(stmt)
+        documents = result.scalars().all()
         
         return [
             {
@@ -199,7 +200,7 @@ class RAGService:
                 "title": doc.title,
                 "source": doc.source,
                 "doc_type": doc.doc_type,
-                "topics": doc.topics,
+                "topics": doc.topics or [],
                 "safety": doc.safety,
                 "created_at": doc.created_at.isoformat()
             }
@@ -208,9 +209,12 @@ class RAGService:
     
     async def delete_document(self, document_id: int):
         """Delete document and all its chunks (CASCADE)"""
-        document = self.db.query(Document).filter(Document.id == document_id).first()
+        stmt = select(Document).where(Document.id == document_id)
+        result = await self.db.execute(stmt)
+        document = result.scalar_one_or_none()
+        
         if not document:
             raise ValueError(f"Document {document_id} not found")
         
-        self.db.delete(document)
-        self.db.commit()
+        await self.db.delete(document)
+        await self.db.commit()

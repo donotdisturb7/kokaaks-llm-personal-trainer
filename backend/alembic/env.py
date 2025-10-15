@@ -2,10 +2,12 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
+import os
 
 # Import your models here
 from app.database import Base
 from app.models import Conversation, LocalStats, TrainingExample, Dataset, DatasetExample
+from app.models.rag import Document, DocumentChunk
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -57,6 +59,12 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
+    # Prefer DATABASE_URL/ALEMBIC_DATABASE_URL from env; convert async URL to sync for Alembic
+    env_url = os.getenv("ALEMBIC_DATABASE_URL") or os.getenv("DATABASE_URL")
+    if env_url:
+        sync_url = env_url.replace("postgresql+asyncpg://", "postgresql://")
+        config.set_main_option("sqlalchemy.url", sync_url)
+
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",

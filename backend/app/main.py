@@ -23,11 +23,7 @@ async def lifespan(app: FastAPI):
     """Gestionnaire de cycle de vie de l'application"""
     # Startup
     logger.info("Starting KovaaK's AI Trainer API...")
-    try:
-        await create_tables()
-        logger.info("Database tables created successfully")
-    except Exception as e:
-        logger.error(f"Failed to create database tables: {e}")
+    logger.info("Database tables are managed by Alembic migrations")
     
     yield
     

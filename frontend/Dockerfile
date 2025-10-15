@@ -2,9 +2,13 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# Copy package files
+COPY package.json package-lock.json ./
 
+# Clean install with verbose output
+RUN npm ci --verbose
+
+# Copy source code
 COPY . .
 
 EXPOSE 3000

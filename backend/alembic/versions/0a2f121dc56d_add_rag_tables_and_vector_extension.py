@@ -7,6 +7,7 @@ Create Date: 2025-10-14 11:32:49.131547
 """
 from alembic import op
 import sqlalchemy as sa
+from pgvector.sqlalchemy import Vector
 
 
 # revision identifiers, used by Alembic.
@@ -43,19 +44,18 @@ def upgrade() -> None:
         sa.Column('chunk_index', sa.Integer(), nullable=False),
         sa.Column('content', sa.Text(), nullable=False),
         sa.Column('chunk_metadata', sa.dialects.postgresql.JSONB(astext_type=sa.Text()), nullable=True),
-        sa.Column('embedding', sa.dialects.postgresql.ARRAY(sa.Float()), nullable=True),
+        sa.Column('embedding', Vector(384), nullable=True),
         sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
         sa.ForeignKeyConstraint(['document_id'], ['rag_documents.id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('id')
     )
     op.create_index('idx_rag_chunks_doc_idx', 'rag_document_chunks', ['document_id', 'chunk_index'], unique=False)
-    # Create vector index if pgvector available; use ivfflat index on embedding
-    # Note: in SQLAlchemy/pgvector, index creation is done via raw SQL for ALEMBIC
-    # op.execute('CREATE INDEX IF NOT EXISTS idx_rag_chunks_embedding ON rag_document_chunks USING ivfflat (embedding vector_l2_ops);')
+    # Create vector index for similarity search
+    op.execute('CREATE INDEX IF NOT EXISTS idx_rag_chunks_embedding ON rag_document_chunks USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);')
 
 
 def downgrade() -> None:
-    # op.drop_index('idx_rag_chunks_embedding', table_name='rag_document_chunks')
+    op.execute('DROP INDEX IF EXISTS idx_rag_chunks_embedding;')
     op.drop_index('idx_rag_chunks_doc_idx', table_name='rag_document_chunks')
     op.drop_table('rag_document_chunks')
     op.drop_index('idx_rag_docs_type', table_name='rag_documents')

@@ -1,6 +1,6 @@
 "use client"
 
-import { MessageCircle, FileText, BarChart3, Settings } from "lucide-react"
+import { MessageCircle, FileText, BarChart3, Settings, Upload } from "lucide-react"
 import { TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 /**
@@ -29,6 +29,15 @@ export function Sidebar() {
       >
         <FileText className="h-5 w-5" />
         Artifacts
+      </TabsTrigger>
+
+      {/* Onglet PDF Uploader */}
+      <TabsTrigger 
+        value="pdf" 
+        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
+      >
+        <Upload className="h-5 w-5" />
+        PDF Uploader
       </TabsTrigger>
       
       {/* Onglet Stats - pour voir les progrès */}

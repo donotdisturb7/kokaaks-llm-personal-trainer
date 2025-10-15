@@ -2,7 +2,7 @@
  * API service for communicating with the KovaaK's AI Trainer backend
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8002'
 
 export interface ChatMessage {
   id: string
@@ -185,6 +185,42 @@ export const api = {
     vector_dimension: number
   }> {
     const response = await fetch(`${API_BASE_URL}/api/rag/health`)
+    return handleResponse(response)
+  },
+
+  /**
+   * List uploaded RAG documents
+   */
+  async listDocuments(docType?: string, topics?: string[]): Promise<{
+    documents: Array<{
+      id: number
+      title: string
+      source: string
+      doc_type: string
+      topics: string[]
+      safety: string
+      created_at: string
+    }>
+  }> {
+    let url = `${API_BASE_URL}/api/rag/documents`
+    const params = new URLSearchParams()
+    if (docType) params.append('doc_type', docType)
+    if (topics && topics.length > 0) {
+      topics.forEach(t => params.append('topics', t))
+    }
+    if (params.toString()) url += `?${params.toString()}`
+    
+    const response = await fetch(url)
+    return handleResponse(response)
+  },
+
+  /**
+   * Delete a RAG document
+   */
+  async deleteDocument(documentId: number): Promise<{ message: string }> {
+    const response = await fetch(`${API_BASE_URL}/api/rag/documents/${documentId}`, {
+      method: 'DELETE',
+    })
     return handleResponse(response)
   },
 }

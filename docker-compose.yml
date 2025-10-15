@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # PostgreSQL Database
   postgres:
@@ -11,13 +9,13 @@ services:
       POSTGRES_PASSWORD: kovaaks_pass
       POSTGRES_DB: kovaaks_ai
     ports:
-      - "5434:5432"
+      - "${POSTGRES_HOST_PORT:-5435}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - kovaaks-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U kovaaks"]
+      test: ["CMD-SHELL", "pg_isready -U kovaaks -d kovaaks_ai"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -28,7 +26,7 @@ services:
     image: redis:7-alpine
     restart: unless-stopped
     ports:
-      - "6380:6379"
+      - "${REDIS_HOST_PORT:-6381}:6379"
     volumes:
       - redis_data:/data
     networks:
@@ -48,7 +46,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "9000:9000"
+      - "${KOVAAKS_PROXY_PORT:-9001}:9000"
     networks:
       - kovaaks-network
     healthcheck:
@@ -66,7 +64,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "8001:8000"
+      - "${BACKEND_HOST_PORT:-8002}:8000"
     environment:
       - DATABASE_URL=postgresql+asyncpg://kovaaks:kovaaks_pass@postgres:5432/kovaaks_ai
       - REDIS_URL=redis://redis:6379/0
@@ -75,6 +73,7 @@ services:
       - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
       - KOVAAKS_USERNAME=${KOVAAKS_USERNAME:-}
       - KOVAAKS_PROXY_URL=http://kovaaks-proxy:9000
+      - CORS_ORIGINS=["http://localhost:3001","http://127.0.0.1:3001","http://localhost:3000","http://127.0.0.1:3000"]
       - API_DEBUG=true
       - LOG_LEVEL=INFO
     depends_on:
@@ -82,9 +81,6 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    volumes:
-      - ./backend:/app
-      - backend_cache:/app/__pycache__
     networks:
       - kovaaks-network
     healthcheck:
@@ -102,17 +98,13 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "${FRONTEND_HOST_PORT:-3001}:3000"
     environment:
       - NODE_ENV=development
-      - NEXT_PUBLIC_API_URL=http://localhost:8001
+      - NEXT_PUBLIC_API_URL=http://localhost:8002
     depends_on:
       backend:
         condition: service_healthy
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
     networks:
       - kovaaks-network
 
@@ -126,5 +118,3 @@ volumes:
     name: kovaaks-postgres-data
   redis_data:
     name: kovaaks-redis-data
-  backend_cache:
-    name: kovaaks-backend-cache

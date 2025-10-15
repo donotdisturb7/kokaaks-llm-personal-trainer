@@ -13,6 +13,5 @@ venv/
 README.md
 Dockerfile
 .dockerignore
-alembic/versions/*.py
-!alembic/versions/__init__.py
+
 

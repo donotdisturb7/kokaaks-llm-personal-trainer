@@ -19,7 +19,7 @@ build: ## Build les images Docker
 
 up: ## Démarre tous les services
 	@echo "$(GREEN)🚀 Démarrage de tous les services...$(NC)"
-	./docker-start.sh
+	./docker-restart.sh
 
 down: ## Arrête tous les services
 	@echo "$(YELLOW)🛑 Arrêt de tous les services...$(NC)"
@@ -88,7 +88,7 @@ test-cache: ## Test le système de cache
 
 dev: ## Démarre en mode développement avec logs
 	@echo "$(GREEN)🚀 Démarrage en mode développement...$(NC)"
-	./docker-start.sh
+	./docker-restart.sh
 	docker compose logs -f
 
 

@@ -79,7 +79,8 @@ app.get('/api/benchmarks/:username', async (req: Request, res: Response) => {
     const page = parseInt(req.query.page as string) || 1;
     const max = parseInt(req.query.max as string) || 100;
     
-    const benchmarks = await client.getBenchmarkProgressForUsername(username, {
+    const benchmarks = await client.getBenchmarkProgressForUsername({
+      username,
       page,
       max
     });
@@ -98,7 +99,7 @@ app.get('/api/benchmarks/:username', async (req: Request, res: Response) => {
 app.get('/api/favorites/:username', async (req: Request, res: Response) => {
   try {
     const { username } = req.params;
-    const favorites = await client.getFavoriteScenariosByUsername(username);
+    const favorites = await client.getFavoriteScenariosByUsername({ username });
     res.json({ success: true, data: favorites });
   } catch (error: any) {
     console.error(`Error fetching favorites:`, error.message);
@@ -113,7 +114,7 @@ app.get('/api/favorites/:username', async (req: Request, res: Response) => {
 app.get('/api/scores/:username/:scenarioName', async (req: Request, res: Response) => {
   try {
     const { username, scenarioName } = req.params;
-    const scores = await client.getLastScoresByScenarioName(username, scenarioName);
+    const scores = await client.getLastScoresByScenarioName({ username, scenarioName });
     res.json({ success: true, data: scores });
   } catch (error: any) {
     console.error(`Error fetching scores:`, error.message);
@@ -138,7 +139,8 @@ app.get('/api/search/scenarios', async (req: Request, res: Response) => {
       });
     }
     
-    const scenarios = await client.searchScenariosByName(scenarioName, {
+    const scenarios = await client.searchScenariosByName({
+      scenarioName,
       page,
       max
     });

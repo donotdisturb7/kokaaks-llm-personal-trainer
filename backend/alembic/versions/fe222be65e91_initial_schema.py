@@ -40,7 +40,8 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index('idx_messages', 'conversations', ['messages'], unique=False, postgresql_using='gin')
+    # Note: GIN index on JSON removed - not critical for functionality
+    # If needed later, use JSONB type instead of JSON for GIN support
     op.create_index('idx_user_created', 'conversations', ['user_id', 'created_at'], unique=False)
     op.create_index(op.f('ix_conversations_id'), 'conversations', ['id'], unique=False)
     op.create_table('training_sessions',
@@ -113,7 +114,7 @@ def downgrade() -> None:
     op.drop_table('training_sessions')
     op.drop_index(op.f('ix_conversations_id'), table_name='conversations')
     op.drop_index('idx_user_created', table_name='conversations')
-    op.drop_index('idx_messages', table_name='conversations', postgresql_using='gin')
+    # GIN index was removed in upgrade, so no need to drop it
     op.drop_table('conversations')
     op.drop_index(op.f('ix_users_kovaaks_username'), table_name='users')
     op.drop_index(op.f('ix_users_id'), table_name='users')

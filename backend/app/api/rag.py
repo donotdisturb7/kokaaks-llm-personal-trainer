@@ -5,7 +5,7 @@ Retrieval Augmented Generation for exercise advice and training guidance
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from pydantic import BaseModel
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
 from app.services.rag_service import RAGService
@@ -37,7 +37,7 @@ class IngestResponse(BaseModel):
 @router.post("/query", response_model=QueryResponse)
 async def query_rag(
     request: QueryRequest,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Query RAG system for exercise advice, training guidance, or injury prevention
@@ -67,7 +67,7 @@ async def ingest_pdf(
     doc_type: Optional[str] = "pdf",
     topics: Optional[List[str]] = None,
     safety: Optional[str] = "general",
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Ingest a PDF document into the RAG system
@@ -116,7 +116,7 @@ async def ingest_text(
     doc_type: Optional[str] = "text",
     topics: Optional[List[str]] = None,
     safety: Optional[str] = "general",
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Ingest plain text content into the RAG system
@@ -155,7 +155,7 @@ async def ingest_text(
 async def list_documents(
     doc_type: Optional[str] = None,
     topics: Optional[List[str]] = None,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
     """
     List all ingested documents with optional filtering
@@ -174,7 +174,7 @@ async def list_documents(
 @router.delete("/documents/{document_id}")
 async def delete_document(
     document_id: int,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Delete a document and all its chunks

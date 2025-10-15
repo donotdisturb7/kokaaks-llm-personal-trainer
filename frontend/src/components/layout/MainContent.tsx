@@ -3,6 +3,7 @@
 import { TabsContent } from "@/components/ui/tabs"
 import { ChatInterface } from "@/components/chat/ChatInterface"
 import ArtifactsTab from "@/components/artifacts/ArtifactsTab"
+import PdfUploaderTab from "@/components/rag/PdfUploaderTab"
 import { BarChart3, Settings } from "lucide-react"
 
 /**
@@ -18,6 +19,10 @@ export function MainContent() {
 
       <TabsContent value="artifacts" className="m-0 flex-1 h-full overflow-auto p-6 data-[state=active]:flex data-[state=active]:flex-col">
         <ArtifactsTab />
+      </TabsContent>
+
+      <TabsContent value="pdf" className="m-0 flex-1 h-full overflow-auto p-6 data-[state=active]:flex data-[state=active]:flex-col">
+        <PdfUploaderTab />
       </TabsContent>
 
       <TabsContent value="stats" className="m-0 flex-1 h-full overflow-auto p-6 data-[state=active]:flex data-[state=active]:flex-col">

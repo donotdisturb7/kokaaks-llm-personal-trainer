@@ -44,7 +44,7 @@ class Settings(BaseSettings):
     api_debug: bool = True
     
     # Configuration CORS
-    cors_origins: List[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    cors_origins: List[str] = ["http://localhost:3001", "http://127.0.0.1:3001"]
     
     # Configuration KovaaK's Proxy
     kovaaks_proxy_url: str = "http://localhost:9000"
