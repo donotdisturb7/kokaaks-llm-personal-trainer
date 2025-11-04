@@ -1,0 +1,22 @@
+# Development dependencies for testing and code quality
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+httpx>=0.25.0  # For testing async HTTP calls
+
+# Code quality
+black>=23.7.0
+isort>=5.12.0
+flake8>=6.1.0
+mypy>=1.5.0
+
+# Type stubs
+types-redis>=4.6.0
+types-PyYAML>=6.0.0
+
+# Debugging
+ipython>=8.14.0
+ipdb>=0.13.13

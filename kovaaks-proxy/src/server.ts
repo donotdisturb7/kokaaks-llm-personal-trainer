@@ -12,6 +12,44 @@ app.use(express.json());
 // Client KovaaK's
 const client = new KovaaksApiClient();
 
+// Root endpoint
+app.get('/', (req: Request, res: Response) => {
+  res.json({
+    service: 'KovaaK\'s API Proxy',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      health: '/health',
+      profile: '/api/profile/:username',
+      scenarios: '/api/scenarios/:username',
+      highscores: '/api/highscores/:username',
+      benchmarks: '/api/benchmarks/:username',
+      favorites: '/api/favorites/:username',
+      scores: '/api/scores/:username/:scenarioName',
+      search: '/api/search/scenarios?name=xxx',
+      leaderboard: '/api/leaderboard/global'
+    },
+    documentation: 'See README.md for usage'
+  });
+});
+
+// API root endpoint
+app.get('/api', (req: Request, res: Response) => {
+  res.json({
+    message: 'KovaaK\'s API Proxy',
+    availableEndpoints: [
+      'GET /api/profile/:username',
+      'GET /api/scenarios/:username',
+      'GET /api/highscores/:username',
+      'GET /api/benchmarks/:username',
+      'GET /api/favorites/:username',
+      'GET /api/scores/:username/:scenarioName',
+      'GET /api/search/scenarios?name=xxx',
+      'GET /api/leaderboard/global'
+    ]
+  });
+});
+
 // Health check
 app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'healthy', service: 'kovaaks-proxy' });
