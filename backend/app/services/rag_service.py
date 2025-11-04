@@ -102,10 +102,10 @@ class RAGService:
         
         sql += " ORDER BY dc.embedding <=> %s LIMIT %s"
         params.extend([query_embedding, max_results])
-        
-        result = self.db.execute(text(sql), params)
+
+        result = await self.db.execute(text(sql), params)
         chunks = []
-        
+
         for row in result:
             chunks.append({
                 "id": row.id,

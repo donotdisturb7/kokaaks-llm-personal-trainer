@@ -9,6 +9,14 @@ venv/
 *.log
 .pytest_cache/
 
+# Testing & Coverage
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+*.cover
+.hypothesis/
+
 # Node
 node_modules/
 dist/
@@ -20,6 +28,7 @@ dist/
 # IDE
 .vscode/
 .idea/
+.claude/
 
 # Env
 .env

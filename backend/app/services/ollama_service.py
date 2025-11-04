@@ -3,12 +3,12 @@ Service Ollama - Connexion modulaire pour localhost ou IP
 Gère la communication avec l'API Ollama pour l'IA
 """
 import httpx
-import asyncio
 from typing import Dict, Any, Optional, List
 from pydantic import BaseModel
 import logging
 
 from app.config import Settings
+from app.constants import AIM_TRAINING_SYSTEM_PROMPT
 
 logger = logging.getLogger(__name__)
 
@@ -126,7 +126,7 @@ class OllamaService:
             return "Désolé, je ne peux pas me connecter au service d'IA pour le moment."
     
     async def generate_aim_training_advice(
-        self, 
+        self,
         user_question: str,
         user_stats: Optional[Dict[str, Any]] = None
     ) -> str:
@@ -134,25 +134,14 @@ class OllamaService:
         Génère des conseils spécialisés en entraînement de visée
         Utilise un prompt système spécialisé pour KovaaK's
         """
-        system_prompt = """Tu es un expert en entraînement de visée et un coach spécialisé dans KovaaK's FPS Aim Trainer. 
-        
-Ton rôle est d'aider les joueurs à améliorer leur précision et leurs performances. Tu connais:
-- Les différents types d'aim (tracking, flicking, target switching)
-- Les exercices KovaaK's les plus efficaces
-- Les techniques de placement de souris et de posture
-- L'analyse des statistiques de performance
-- La progression et l'entraînement structuré
-
-Réponds de manière concise, pratique et motivante. Donne des conseils concrets et des exercices spécifiques."""
-
         # Ajout des stats utilisateur si disponibles
         if user_stats:
             stats_context = f"\n\nStatistiques du joueur: {user_stats}"
             user_question += stats_context
-        
+
         return await self.generate_response(
             prompt=user_question,
-            system_prompt=system_prompt
+            system_prompt=AIM_TRAINING_SYSTEM_PROMPT
         )
     
     async def close(self):

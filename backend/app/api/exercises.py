@@ -8,6 +8,7 @@ import logging
 
 from app.database import get_db
 from app.services.llm_context_builder import create_llm_context_builder
+from app.config import get_settings
 from sqlalchemy.ext.asyncio import AsyncSession
 
 logger = logging.getLogger(__name__)
@@ -167,6 +168,9 @@ async def get_personalized_recommendations(
     limit: int = Query(5, ge=1, le=20)
 ):
     """Récupère des exercices recommandés basés sur les stats de l'utilisateur"""
+    settings = get_settings()
+    username = settings.kovaaks_username or "anonymous"
+
     try:
         # Construire le contexte utilisateur
         context_builder = create_llm_context_builder()
@@ -231,7 +235,7 @@ async def get_personalized_recommendations(
                     break
         
         return {
-            "user": current_user.kovaaks_username,
+            "user": username,
             "recommendations": unique_recommendations,
             "analysis": {
                 "trend": trend,
@@ -240,13 +244,13 @@ async def get_personalized_recommendations(
                 "reasoning": _generate_recommendation_reasoning(analysis, unique_recommendations)
             }
         }
-        
+
     except Exception as e:
         logger.error(f"Erreur lors de la génération des recommandations: {e}")
         # Fallback: retourner des exercices populaires
         popular_exercises = [ex for ex in EXERCISES_DATA if ex["difficulty"] == "medium"][:limit]
         return {
-            "user": current_user.kovaaks_username,
+            "user": username,
             "recommendations": popular_exercises,
             "analysis": {
                 "trend": "unknown",

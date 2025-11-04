@@ -5,9 +5,8 @@ Expose les données KovaaK's avec cache Redis
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from typing import Optional, List
 import logging
+import asyncio
 
-# from app.dependencies import get_current_user, get_current_kovaaks_username
-# from app.models.user import User
 from app.services.kovaaks_service import create_kovaaks_service
 
 logger = logging.getLogger(__name__)
@@ -111,14 +110,17 @@ async def get_favorites(username: str):
 async def get_summary(username: str):
     """Récupère un résumé complet des stats d'un utilisateur"""
     async with create_kovaaks_service() as kovaaks:
-        # Récupérer toutes les données en parallèle
-        profile = await kovaaks.get_profile_by_username(username)
-        scenarios = await kovaaks.get_scenarios_played_by_username(username, max=50)
-        highscores = await kovaaks.get_recent_high_scores_by_username(username)
-        benchmarks = await kovaaks.get_benchmark_progress_for_username(username)
-        favorites = await kovaaks.get_favorite_scenarios_by_username(username)
-        
-        if not profile:
+        # Récupérer toutes les données en parallèle avec asyncio.gather pour de meilleures performances
+        profile, scenarios, highscores, benchmarks, favorites = await asyncio.gather(
+            kovaaks.get_profile_by_username(username),
+            kovaaks.get_scenarios_played_by_username(username, max=50),
+            kovaaks.get_recent_high_scores_by_username(username),
+            kovaaks.get_benchmark_progress_for_username(username),
+            kovaaks.get_favorite_scenarios_by_username(username),
+            return_exceptions=True  # Continue even if one call fails
+        )
+
+        if not profile or isinstance(profile, Exception):
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Utilisateur {username} non trouvé"
