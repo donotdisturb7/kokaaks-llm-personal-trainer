@@ -4,22 +4,37 @@ Retrieval Augmented Generation for exercise advice and training guidance
 """
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, field_validator
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
 from app.services.rag_service import RAGService
 from app.services.embedding_service import EmbeddingService
 from app.services.pdf_service import PDFService
+from app.constants import SAFETY_LEVELS, DEFAULT_SAFETY_LEVEL
 
 router = APIRouter(prefix="/api/rag", tags=["rag"])
 
 
 class QueryRequest(BaseModel):
-    query: str
-    max_results: Optional[int] = 5
-    topics: Optional[List[str]] = None  # ["wrist", "shoulder", "training"]
-    safety_level: Optional[str] = "general"  # "medical", "general", "training"
+    query: str = Field(..., min_length=1, max_length=1000, description="Query text (1-1000 characters)")
+    max_results: Optional[int] = Field(5, ge=1, le=20, description="Maximum number of results (1-20)")
+    topics: Optional[List[str]] = Field(None, max_length=10, description="List of topics (max 10)")
+    safety_level: Optional[str] = Field(DEFAULT_SAFETY_LEVEL, description=f"Safety level: {', '.join(SAFETY_LEVELS)}")
+
+    @field_validator('safety_level')
+    @classmethod
+    def validate_safety_level(cls, v):
+        if v not in SAFETY_LEVELS:
+            raise ValueError(f"safety_level must be one of: {', '.join(SAFETY_LEVELS)}")
+        return v
+
+    @field_validator('query')
+    @classmethod
+    def validate_query(cls, v):
+        if not v or v.strip() == "":
+            raise ValueError("query cannot be empty")
+        return v.strip()
 
 
 class QueryResponse(BaseModel):
@@ -71,19 +86,37 @@ async def ingest_pdf(
 ):
     """
     Ingest a PDF document into the RAG system
-    
+
     Supported PDFs:
     - Aim training guides
     - Injury prevention articles
     - Exercise tutorials
     - Medical advice (with proper safety level)
     """
-    if not file.filename.endswith('.pdf'):
+    # Validate file type
+    if not file.filename or not file.filename.lower().endswith('.pdf'):
         raise HTTPException(status_code=400, detail="Only PDF files are supported")
-    
+
+    # Validate safety level
+    if safety not in SAFETY_LEVELS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid safety level. Must be one of: {', '.join(SAFETY_LEVELS)}"
+        )
+
     try:
-        # Read PDF content
+        # Read PDF content with size limit (10MB)
+        MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
         content = await file.read()
+
+        if len(content) > MAX_FILE_SIZE:
+            raise HTTPException(
+                status_code=413,
+                detail=f"File too large. Maximum size is {MAX_FILE_SIZE // (1024*1024)}MB"
+            )
+
+        if len(content) == 0:
+            raise HTTPException(status_code=400, detail="File is empty")
         
         # Process PDF
         pdf_service = PDFService()

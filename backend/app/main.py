@@ -2,8 +2,10 @@
 Application FastAPI principale
 Point d'entrée pour l'API KovaaK's AI Trainer
 """
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
 from contextlib import asynccontextmanager
 import logging
 
@@ -50,13 +52,66 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ============================================================================
+# Global Exception Handlers
+# ============================================================================
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """Handle Pydantic validation errors"""
+    logger.warning(f"Validation error on {request.url.path}: {exc.errors()}")
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={
+            "detail": "Validation error",
+            "errors": exc.errors(),
+            "body": exc.body
+        }
+    )
+
+
+@app.exception_handler(ValueError)
+async def value_error_handler(request: Request, exc: ValueError):
+    """Handle ValueError exceptions"""
+    logger.error(f"ValueError on {request.url.path}: {str(exc)}")
+    return JSONResponse(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        content={
+            "detail": str(exc),
+            "type": "ValueError"
+        }
+    )
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    """Handle all uncaught exceptions"""
+    logger.error(f"Unhandled exception on {request.url.path}: {str(exc)}", exc_info=True)
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "detail": "An internal server error occurred",
+            "type": type(exc).__name__,
+            "message": str(exc) if settings.api_debug else "Internal server error"
+        }
+    )
+
+
+# ============================================================================
 # Inclusion des routers
+# ============================================================================
+
 app.include_router(chat.router)
 app.include_router(kovaaks.router)
 app.include_router(stats.router)
 app.include_router(exercises.router)
 app.include_router(llm_context.router)
 app.include_router(rag.router)
+
+
+# ============================================================================
+# Root Endpoints
+# ============================================================================
 
 @app.get("/")
 async def root():
