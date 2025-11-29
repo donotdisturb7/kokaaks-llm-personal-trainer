@@ -1,21 +1,50 @@
+# Dependencies
 node_modules
+
+# Build outputs
 .next
 out
 dist
 build
+
+# Cache
+.eslintcache
+.turbo
+*.tsbuildinfo
+
+# Git and version control
 .git
 .gitignore
+
+# Documentation
 README.md
+*.md
+
+# Environment files
 .env.local
 .env*.local
+
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# OS files
 .DS_Store
 *.pem
+
+# Testing
 coverage
+.nyc_output
+
+# IDE
 .vscode
 .idea
+
+# Docker
+Dockerfile
+Dockerfile.optimized
+.dockerignore
 
 
 

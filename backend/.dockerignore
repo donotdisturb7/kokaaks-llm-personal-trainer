@@ -1,17 +1,56 @@
+# Python cache
 __pycache__
 *.pyc
 *.pyo
 *.pyd
 .Python
+__pycache__/
+*.pytest_cache
+.mypy_cache
+.ruff_cache
+
+# Virtual environments
 env/
 venv/
 .env
 .venv
+
+# Tests and coverage
+tests/
+htmlcov/
+.coverage
+.tox/
+.nox/
+
+# Logs
 *.log
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# Git and IDE
 .git
 .gitignore
-README.md
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Docker files
 Dockerfile
+Dockerfile.optimized
 .dockerignore
+
+# Documentation
+README.md
+*.md
+docs/
+
+# Development scripts
+run_tests.sh
 
 

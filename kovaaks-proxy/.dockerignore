@@ -1,9 +1,43 @@
+# Dependencies
 node_modules
+
+# Build output (only exclude after build)
 dist
+
+# Logs
 npm-debug.log
+*.log
+
+# Git
 .git
 .gitignore
-README.md
+
+# Environment
 .env
+.env.*
+
+# Documentation
+README.md
 *.md
+
+# Config files (keep tsconfig.json for build)
+.eslintrc*
+.prettierrc*
+
+# Testing
+coverage/
+.nyc_output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+
+# Docker
+Dockerfile
+Dockerfile.optimized
+.dockerignore
 

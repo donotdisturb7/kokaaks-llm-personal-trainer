@@ -29,7 +29,7 @@ export function StatusIndicator({ className }: StatusIndicatorProps) {
     }
 
     checkHealth()
-    
+
     // Check health every 30 seconds
     const interval = setInterval(checkHealth, 30000)
     return () => clearInterval(interval)
@@ -52,17 +52,17 @@ export function StatusIndicator({ className }: StatusIndicatorProps) {
   return (
     <div className={cn("flex items-center gap-2 text-sm", className)}>
       <div className={cn(
-        "w-2 h-2 rounded-full animate-pulse",
+        "w-2.5 h-2.5 rounded-full animate-pulse shadow-[0_0_8px_currentColor]",
         getStatusColor()
       )} />
-           <span className="text-muted-foreground">
-             Backend: {getStatusText()}
-           </span>
-           {health && health.status === "healthy" && (
-             <span className="text-muted-foreground">
-               ({health.llm_provider})
-             </span>
-           )}
+      <span className="text-muted-foreground">
+        Backend: {getStatusText()}
+      </span>
+      {health && health.status === "healthy" && (
+        <span className="text-muted-foreground">
+          ({health.llm_provider})
+        </span>
+      )}
     </div>
   )
 }

@@ -8,17 +8,29 @@ services:
       POSTGRES_USER: kovaaks
       POSTGRES_PASSWORD: kovaaks_pass
       POSTGRES_DB: kovaaks_ai
+      # PostgreSQL performance tuning
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
     ports:
-      - "${POSTGRES_HOST_PORT:-5435}:5432"
+      - "${POSTGRES_HOST_PORT:-5436}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - kovaaks-network
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U kovaaks -d kovaaks_ai"]
+      test: [ "CMD-SHELL", "pg_isready -U kovaaks -d kovaaks_ai" ]
       interval: 5s
       timeout: 5s
       retries: 5
+      start_period: 10s
 
   # Redis Cache
   redis:
@@ -26,35 +38,60 @@ services:
     image: redis:7-alpine
     restart: unless-stopped
     ports:
-      - "${REDIS_HOST_PORT:-6381}:6379"
+      - "${REDIS_HOST_PORT:-6382}:6379"
     volumes:
       - redis_data:/data
     networks:
       - kovaaks-network
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 5s
       timeout: 3s
       retries: 5
-    command: redis-server --appendonly yes
+      start_period: 5s
+    command: redis-server --appendonly yes --maxmemory 200mb --maxmemory-policy allkeys-lru
 
-  # KovaaK's API Proxy (using official wrapper)
+  # KovaaK's API Proxy
   kovaaks-proxy:
     container_name: kovaaks-proxy
     build:
       context: ./kovaaks-proxy
       dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
     restart: unless-stopped
     ports:
-      - "${KOVAAKS_PROXY_PORT:-9001}:9000"
+      - "${KOVAAKS_PROXY_PORT:-9002}:9000"
     networks:
       - kovaaks-network
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+    # Read-only filesystem for security
+    read_only: true
+    tmpfs:
+      - /tmp
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9000/health"]
-      interval: 10s
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9000/health" ]
+      interval: 15s
       timeout: 5s
       retries: 3
-      start_period: 5s
+      start_period: 10s
 
   # Backend API
   backend:
@@ -62,9 +99,11 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     restart: unless-stopped
     ports:
-      - "${BACKEND_HOST_PORT:-8002}:8000"
+      - "${BACKEND_HOST_PORT:-8003}:8000"
     environment:
       - DATABASE_URL=postgresql+asyncpg://kovaaks:kovaaks_pass@postgres:5432/kovaaks_ai
       - REDIS_URL=redis://redis:6379/0
@@ -73,22 +112,33 @@ services:
       - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
       - KOVAAKS_USERNAME=${KOVAAKS_USERNAME:-}
       - KOVAAKS_PROXY_URL=http://kovaaks-proxy:9000
-      - CORS_ORIGINS=["http://localhost:3001","http://127.0.0.1:3001","http://localhost:3000","http://127.0.0.1:3000"]
-      - API_DEBUG=true
-      - LOG_LEVEL=INFO
+      - CORS_ORIGINS=["http://localhost:3002","http://127.0.0.1:3002","http://localhost:3000","http://127.0.0.1:3000"]
+      - API_DEBUG=${API_DEBUG:-true}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
+      kovaaks-proxy:
+        condition: service_healthy
     networks:
       - kovaaks-network
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 10s
-      timeout: 5s
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 15s
+      timeout: 10s
       retries: 3
-      start_period: 10s
+      start_period: 30s
 
   # Frontend Next.js
   frontend:
@@ -96,17 +146,34 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8003}
     restart: unless-stopped
     ports:
-      - "${FRONTEND_HOST_PORT:-3001}:3000"
+      - "${FRONTEND_HOST_PORT:-3002}:3000"
     environment:
-      - NODE_ENV=development
-      - NEXT_PUBLIC_API_URL=http://localhost:8002
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8003}
     depends_on:
       backend:
         condition: service_healthy
     networks:
       - kovaaks-network
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000" ]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
 networks:
   kovaaks-network:

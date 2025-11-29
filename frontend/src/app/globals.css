@@ -50,71 +50,70 @@
 
 /* Black theme with red accents */
 :root {
-  --radius: 0.625rem;
-  --background: #000000;
-  --foreground: #ffffff;
-  --card: #111111;
-  --card-foreground: #ffffff;
-  --popover: #111111;
-  --popover-foreground: #ffffff;
-  --primary: #dc2626;
-  --primary-foreground: #ffffff;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #ffffff;
-  --muted: #1a1a1a;
-  --muted-foreground: #a3a3a3;
-  --accent: #1a1a1a;
-  --accent-foreground: #ffffff;
-  --destructive: #dc2626;
-  --border: #262626;
-  --input: #1a1a1a;
-  --ring: #dc2626;
-  --chart-1: #dc2626;
-  --chart-2: #ef4444;
-  --chart-3: #f87171;
-  --chart-4: #fca5a5;
-  --chart-5: #fecaca;
-  --sidebar: #111111;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #dc2626;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1a1a1a;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #262626;
-  --sidebar-ring: #dc2626;
-}
+  /* User Palette - HSL Values */
+  --harvest-orange: 28 100% 50%;
+  --shadow-grey: 266 10% 14%;
+  --shadow-grey-2: 270 8% 19%;
+  --white: 0 0% 100%;
 
-/* Tailwind base styles */
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
+  /* Shadcn/UI Mapping */
+  --background: var(--shadow-grey);
+  --foreground: var(--white);
 
-:root {
-  --background: 0 0% 0%;
-  --foreground: 0 0% 98%;
-  --card: 0 0% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --popover: 0 0% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 0 0% 9%;
-  --secondary: 0 0% 14.9%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 0 0% 14.9%;
-  --muted-foreground: 0 0% 63.9%;
-  --accent: 0 0% 14.9%;
-  --accent-foreground: 0 0% 98%;
+  --card: var(--shadow-grey-2);
+  --card-foreground: var(--white);
+
+  --popover: var(--shadow-grey-2);
+  --popover-foreground: var(--white);
+
+  --primary: var(--harvest-orange);
+  --primary-foreground: var(--white);
+
+  --secondary: var(--shadow-grey-2);
+  --secondary-foreground: var(--white);
+
+  --muted: var(--shadow-grey-2);
+  --muted-foreground: 270 5% 60%; /* Lighter grey for muted text */
+
+  --accent: var(--shadow-grey-2);
+  --accent-foreground: var(--harvest-orange);
+
   --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 14.9%;
-  --input: 0 0% 14.9%;
-  --ring: 0 0% 83.1%;
-  --radius: 0.5rem;
+  --destructive-foreground: var(--white);
+
+  --border: var(--shadow-grey-2);
+  --input: var(--shadow-grey-2);
+  --ring: var(--harvest-orange);
+
+  --radius: 0.625rem;
+
+  /* Chart colors (kept from previous or adjusted if needed) */
+  --chart-1: var(--harvest-orange);
+  --chart-2: 35 90% 60%;
+  --chart-3: 40 80% 70%;
+  --chart-4: 266 20% 40%;
+  --chart-5: 270 15% 50%;
+
+  /* Sidebar specific (mapping to main theme for now) */
+  --sidebar: var(--shadow-grey);
+  --sidebar-foreground: var(--white);
+  --sidebar-primary: var(--harvest-orange);
+  --sidebar-primary-foreground: var(--white);
+  --sidebar-accent: var(--shadow-grey-2);
+  --sidebar-accent-foreground: var(--white);
+  --sidebar-border: var(--shadow-grey-2);
+  --sidebar-ring: var(--harvest-orange);
+}
+
+/* Gradients */
+.bg-gradient-main {
+  background: linear-gradient(180deg, hsl(var(--harvest-orange) / 0.1), hsl(var(--shadow-grey)), hsl(var(--shadow-grey)));
+}
+
+.text-gradient-orange {
+  background: linear-gradient(90deg, hsl(var(--harvest-orange)), #ff9e40);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 * {

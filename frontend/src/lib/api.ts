@@ -2,7 +2,7 @@
  * API service for communicating with the KovaaK's AI Trainer backend
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8002'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8003'
 
 export interface ChatMessage {
   id: string

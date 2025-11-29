@@ -3,9 +3,10 @@ Configuration de l'application
 Gère les variables d'environnement et la configuration Ollama
 """
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import Field, AliasChoices
+from pydantic import Field, AliasChoices, field_validator
 from typing import List, Optional
 import os
+import json
 
 
 class Settings(BaseSettings):
@@ -45,7 +46,19 @@ class Settings(BaseSettings):
     
     # Configuration CORS
     cors_origins: List[str] = ["http://localhost:3001", "http://127.0.0.1:3001"]
-    
+
+    @field_validator('cors_origins', mode='before')
+    @classmethod
+    def parse_cors_origins(cls, v):
+        """Parse CORS_ORIGINS from JSON string if needed"""
+        if isinstance(v, str):
+            try:
+                return json.loads(v)
+            except json.JSONDecodeError:
+                # If it's not valid JSON, treat it as a single origin
+                return [v]
+        return v
+
     # Configuration KovaaK's Proxy
     kovaaks_proxy_url: str = "http://localhost:9000"
     

@@ -12,50 +12,55 @@ import { TabsList, TabsTrigger } from "@/components/ui/tabs"
  */
 export function Sidebar() {
   return (
-    <TabsList className="flex flex-col w-64 bg-card border-r border-border rounded-none h-full p-0 gap-0">
-      {/* Onglet Chat - le plus utilisé probablement */}
-      <TabsTrigger 
-        value="chat" 
-        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
+    <TabsList className="flex flex-col w-64 bg-black/20 backdrop-blur-md border-r border-white/10 rounded-none h-full p-0 gap-2 pt-4">
+      {/* Onglet Chat */}
+      <TabsTrigger
+        value="chat"
+        className="relative flex items-center gap-3 justify-start px-6 py-3 w-full rounded-none transition-all duration-200 data-[state=active]:bg-white/5 data-[state=active]:text-[hsl(var(--harvest-orange))] hover:bg-white/5 group"
       >
-        <MessageCircle className="h-5 w-5" />
-        Chat
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[hsl(var(--harvest-orange))] opacity-0 transition-opacity data-[state=active]:opacity-100" />
+        <MessageCircle className="h-5 w-5 transition-colors group-hover:text-[hsl(var(--harvest-orange))]" />
+        <span className="font-medium">Chat</span>
       </TabsTrigger>
-      
-      {/* Onglet Artifacts - feuilles générées par l'IA */}
-      <TabsTrigger 
-        value="artifacts" 
-        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
+
+      {/* Onglet Artifacts */}
+      <TabsTrigger
+        value="artifacts"
+        className="relative flex items-center gap-3 justify-start px-6 py-3 w-full rounded-none transition-all duration-200 data-[state=active]:bg-white/5 data-[state=active]:text-[hsl(var(--harvest-orange))] hover:bg-white/5 group"
       >
-        <FileText className="h-5 w-5" />
-        Artifacts
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[hsl(var(--harvest-orange))] opacity-0 transition-opacity data-[state=active]:opacity-100" />
+        <FileText className="h-5 w-5 transition-colors group-hover:text-[hsl(var(--harvest-orange))]" />
+        <span className="font-medium">Artifacts</span>
       </TabsTrigger>
 
       {/* Onglet PDF Uploader */}
-      <TabsTrigger 
-        value="pdf" 
-        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
+      <TabsTrigger
+        value="pdf"
+        className="relative flex items-center gap-3 justify-start px-6 py-3 w-full rounded-none transition-all duration-200 data-[state=active]:bg-white/5 data-[state=active]:text-[hsl(var(--harvest-orange))] hover:bg-white/5 group"
       >
-        <Upload className="h-5 w-5" />
-        PDF Uploader
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[hsl(var(--harvest-orange))] opacity-0 transition-opacity data-[state=active]:opacity-100" />
+        <Upload className="h-5 w-5 transition-colors group-hover:text-[hsl(var(--harvest-orange))]" />
+        <span className="font-medium">PDF Uploader</span>
       </TabsTrigger>
-      
-      {/* Onglet Stats - pour voir les progrès */}
-      <TabsTrigger 
-        value="stats" 
-        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
+
+      {/* Onglet Stats */}
+      <TabsTrigger
+        value="stats"
+        className="relative flex items-center gap-3 justify-start px-6 py-3 w-full rounded-none transition-all duration-200 data-[state=active]:bg-white/5 data-[state=active]:text-[hsl(var(--harvest-orange))] hover:bg-white/5 group"
       >
-        <BarChart3 className="h-5 w-5" />
-        Statistiques
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[hsl(var(--harvest-orange))] opacity-0 transition-opacity data-[state=active]:opacity-100" />
+        <BarChart3 className="h-5 w-5 transition-colors group-hover:text-[hsl(var(--harvest-orange))]" />
+        <span className="font-medium">Statistiques</span>
       </TabsTrigger>
-      
-      {/* Onglet Paramètres - configuration de l'IA */}
-      <TabsTrigger 
-        value="settings" 
-        className="flex items-center gap-3 justify-start px-4 py-3 w-full rounded-none data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hover:bg-accent/50"
+
+      {/* Onglet Paramètres */}
+      <TabsTrigger
+        value="settings"
+        className="relative flex items-center gap-3 justify-start px-6 py-3 w-full rounded-none transition-all duration-200 data-[state=active]:bg-white/5 data-[state=active]:text-[hsl(var(--harvest-orange))] hover:bg-white/5 group"
       >
-        <Settings className="h-5 w-5" />
-        Paramètres
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[hsl(var(--harvest-orange))] opacity-0 transition-opacity data-[state=active]:opacity-100" />
+        <Settings className="h-5 w-5 transition-colors group-hover:text-[hsl(var(--harvest-orange))]" />
+        <span className="font-medium">Paramètres</span>
       </TabsTrigger>
     </TabsList>
   )
