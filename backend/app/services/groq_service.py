@@ -1,7 +1,3 @@
-"""
-Service Groq - Connexion avec l'API Groq via OpenAI SDK
-Gère la communication avec l'API Groq pour l'IA
-"""
 from openai import AsyncOpenAI
 from typing import Dict, Any, Optional, List
 from pydantic import BaseModel
@@ -56,11 +52,7 @@ class GroqService:
             return False
     
     async def get_available_models(self) -> List[str]:
-        """
-        Récupère la liste des modèles disponibles sur Groq
-        Retourne une liste des noms de modèles
-        """
-        # Modèles Groq disponibles (liste statique pour l'instant)
+
         return [
             "llama-3.3-70b-versatile",
             "llama-3.1-70b-versatile",

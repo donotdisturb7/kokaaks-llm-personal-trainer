@@ -1,6 +1,3 @@
-"""
-Embedding Service - FastEmbed integration for vector embeddings
-"""
 from typing import List, Optional
 import asyncio
 from fastembed import TextEmbedding

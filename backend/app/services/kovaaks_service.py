@@ -1,7 +1,3 @@
-"""
-Service pour interagir avec l'API KovaaK's
-Utilise le proxy Node.js avec le wrapper officiel kovaaks-api-client
-"""
 import httpx
 from typing import Optional, Dict, Any, List
 import logging

@@ -1,17 +1,9 @@
-"""
-Modèles pour le fine-tuning et la curation de datasets
-Permet de collecter et organiser des exemples d'entraînement
-"""
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, CheckConstraint, Index
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.sql import func
 from app.database import Base
 
 class TrainingExample(Base):
-    """
-    Modèle pour les exemples d'entraînement collectés depuis diverses sources
-    Utilisé pour préparer des datasets de fine-tuning
-    """
     __tablename__ = "training_examples"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -32,10 +24,7 @@ class TrainingExample(Base):
 
 
 class Dataset(Base):
-    """
-    Modèle pour regrouper des exemples d'entraînement en datasets
-    Permet d'organiser les exemples pour différents usages de fine-tuning
-    """
+
     __tablename__ = "datasets"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -48,10 +37,6 @@ class Dataset(Base):
 
 
 class DatasetExample(Base):
-    """
-    Table de jonction entre datasets et exemples d'entraînement
-    Permet à un exemple d'appartenir à plusieurs datasets
-    """
     __tablename__ = "dataset_examples"
 
     dataset_id = Column(Integer, ForeignKey('datasets.id', ondelete='CASCADE'), primary_key=True)

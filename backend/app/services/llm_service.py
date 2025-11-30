@@ -1,7 +1,3 @@
-"""
-Service LLM Manager - Gère le choix entre Ollama et Groq
-Interface unifiée pour interagir avec différents providers IA
-"""
 from typing import Dict, Any, Optional, List, Protocol
 import logging
 
@@ -140,14 +136,23 @@ class LLMService:
         """Génère une réponse RAG basée sur le contexte fourni"""
         system_prompt = self._build_rag_system_prompt(safety_level)
         
-        prompt = f"""Contexte fourni:
+        prompt = f"""Context provided:
 {context}
 
-Question de l'utilisateur: {query}
+User question: {query}
 
-Réponds de manière précise et utile en te basant uniquement sur le contexte fourni. 
-Cite tes sources quand c'est pertinent. Si le contexte ne contient pas d'information suffisante, 
-dis-le clairement."""
+CRITICAL INSTRUCTIONS:
+- Answer precisely and helpfully based ONLY on the provided context above
+- INCLUDE ALL relevant information from the context in your answer - do NOT tell users to "check the PDF" or "refer to the document"
+- QUOTE EXACTLY sharecodes, routine names, and instructions without modifying them
+- When providing routines, ALWAYS include:
+  * The complete sharecode (the long alphanumeric code after "Sharecode")
+  * All scenarios/exercises with their exact names and durations
+  * Any specific instructions or focus points mentioned
+- If the context contains a sharecode, YOU MUST include it in your response
+- Do NOT rephrase codes, numbers, or identifiers - copy them exactly as they appear
+- When listing scenarios/exercises, preserve the exact format, numbering, and details from the source
+- If the context doesn't contain sufficient information, say so clearly"""
         
         return await self.provider.generate_response(
             prompt=prompt,
@@ -156,21 +161,29 @@ dis-le clairement."""
     
     def _build_rag_system_prompt(self, safety_level: str) -> str:
         """Construit le prompt système pour RAG selon le niveau de sécurité"""
-        base_prompt = """Tu es un assistant spécialisé en entraînement de visée (aim training) et en prévention des blessures liées au gaming. 
-Tu fournis des conseils basés sur des sources fiables et tu es toujours prudent avec les conseils médicaux."""
+        base_prompt = """You are an AI assistant specialized in aim training and gaming injury prevention.
+You provide advice based on reliable sources and are always cautious with medical recommendations.
+
+CRITICAL - KovaaK's Sharecode Format:
+- Sharecodes are LONG alphanumeric codes that appear AFTER the word "Sharecode" in the documents
+- Format: "ROUTINE_NAME Sharecode LONGCODE"
+- Example: "HAUNTR TRACK Sharecode KOVAAKSCLIPPINGCAFFEINATEDCASH" → sharecode is KOVAAKSCLIPPINGCAFFEINATEDCASH
+- Another example: "Smoothness & Precision Easy Sharecode KOVAAKSBOOMSTICKINGFASTGULAG" → sharecode is KOVAAKSBOOMSTICKINGFASTGULAG
+- The sharecode is what users copy-paste into KovaaK's Playlist tab
+- Short codes (4-5 chars) before routine names are NOT sharecodes, they are routine IDs/tags"""
         
         if safety_level == "medical":
             return base_prompt + """
-IMPORTANT: Tu traites des informations médicales. Toujours recommander de consulter un professionnel de santé 
-pour tout problème de santé. Ne jamais donner de diagnostic ou de traitement médical."""
+IMPORTANT: You're dealing with medical information. Always recommend consulting a healthcare professional
+for any health concerns. Never provide medical diagnosis or treatment."""
         elif safety_level == "training":
             return base_prompt + """
-Tu te concentres sur l'entraînement et l'amélioration des performances. 
-Sois précis sur les techniques et les exercices recommandés."""
+You focus on training and performance improvement.
+Be precise about recommended techniques and exercises."""
         else:  # general
             return base_prompt + """
-Tu donnes des conseils généraux sur l'entraînement et le gaming. 
-Pour tout conseil médical, recommande de consulter un professionnel."""
+You provide general advice on training and gaming.
+For any medical advice, recommend consulting a healthcare professional."""
     
     async def close(self):
         """Ferme la connexion du provider"""

@@ -1,8 +1,6 @@
-"""
-RAG API endpoints
-Retrieval Augmented Generation for exercise advice and training guidance
-"""
 from typing import List, Optional
+import logging
+import traceback
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -12,6 +10,8 @@ from app.services.rag_service import RAGService
 from app.services.embedding_service import EmbeddingService
 from app.services.pdf_service import PDFService
 from app.constants import SAFETY_LEVELS, DEFAULT_SAFETY_LEVEL
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/rag", tags=["rag"])
 
@@ -54,14 +54,7 @@ async def query_rag(
     request: QueryRequest,
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Query RAG system for exercise advice, training guidance, or injury prevention
-    
-    Example queries:
-    - "How to improve wrist stability for aim training?"
-    - "What exercises help with shoulder pain from gaming?"
-    - "Best warm-up routine before KovaaK's sessions"
-    """
+
     try:
         rag_service = RAGService(db)
         result = await rag_service.query(
@@ -72,6 +65,8 @@ async def query_rag(
         )
         return result
     except Exception as e:
+        logger.error(f"RAG query failed: {str(e)}")
+        logger.error(traceback.format_exc())
         raise HTTPException(status_code=500, detail=f"RAG query failed: {str(e)}")
 
 
@@ -84,20 +79,9 @@ async def ingest_pdf(
     safety: Optional[str] = "general",
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Ingest a PDF document into the RAG system
-
-    Supported PDFs:
-    - Aim training guides
-    - Injury prevention articles
-    - Exercise tutorials
-    - Medical advice (with proper safety level)
-    """
-    # Validate file type
     if not file.filename or not file.filename.lower().endswith('.pdf'):
         raise HTTPException(status_code=400, detail="Only PDF files are supported")
 
-    # Validate safety level
     if safety not in SAFETY_LEVELS:
         raise HTTPException(
             status_code=400,
@@ -151,14 +135,7 @@ async def ingest_text(
     safety: Optional[str] = "general",
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Ingest plain text content into the RAG system
-    
-    Useful for:
-    - Exercise descriptions
-    - Training tips
-    - Manual content entry
-    """
+
     try:
         # Process text into chunks
         pdf_service = PDFService()

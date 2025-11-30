@@ -1,6 +1,3 @@
-"""
-Modèles pour les statistiques et préférences utilisateur
-"""
 from sqlalchemy import Column, Integer, String, Float, DateTime, Text, Index
 from sqlalchemy.sql import func
 from app.database import Base

@@ -17,10 +17,10 @@ logger = logging.getLogger(__name__)
 
 class LLMContextBuilder:
     """Service pour construire le contexte pour le LLM"""
-    
+
     def __init__(self):
         self.settings = get_settings()
-        self.cache = CacheService(self.settings)
+        self.cache = CacheService()
     
     async def build_context(
         self, 
@@ -116,21 +116,21 @@ class LLMContextBuilder:
             return {"error": "Nom d'utilisateur KovaaK's non configuré"}
         
         try:
-            async with create_kovaaks_service(self.settings, self.cache) as kovaaks_service:
+            async with create_kovaaks_service() as kovaaks_service:
                 # Récupérer le profil
                 profile = await kovaaks_service.get_profile_by_username(self.settings.kovaaks_username)
-                
+
                 # Récupérer les scénarios joués
                 scenarios = await kovaaks_service.get_scenarios_played_by_username(
-                    self.settings.kovaaks_username, 
-                    max_results=50
+                    self.settings.kovaaks_username,
+                    max=50
                 )
-                
+
                 # Récupérer les scores récents
                 recent_scores = await kovaaks_service.get_recent_high_scores_by_username(
                     self.settings.kovaaks_username
                 )
-                
+
                 return {
                     "profile": profile,
                     "scenarios_played": scenarios,
@@ -178,46 +178,75 @@ class LLMContextBuilder:
     
     def format_context_for_llm(self, context: Dict[str, Any]) -> str:
         """Formate le contexte pour le LLM"""
-        system_prompt = """Tu es un coach d'entraînement de visée spécialisé dans KovaaK's FPS Aim Trainer. 
-Tu aides les joueurs à améliorer leur précision et leurs performances.
+        system_prompt = """You are a specialized aim training coach for KovaaK's FPS Aim Trainer.
+You help players improve their accuracy and performance.
 
-CONTEXTE UTILISATEUR:
+USER CONTEXT:
 """
-        
-        # Ajouter les stats locales
-        local_stats = context.get("local_stats", {})
-        if "error" not in local_stats:
-            system_prompt += f"""
-STATS LOCALES (dernières entrées):
-- Score moyen: {local_stats.get('average_score', 0):.1f}
-- Total d'entrées: {local_stats.get('total_entries', 0)}
-- Entrées récentes: {local_stats.get('recent_entries', 0)}
 
-TOP SCÉNARIOS:
+        # Prioritize KovaaK's API data over local stats
+        kovaaks_data = context.get("kovaaks_api_data", {})
+        if "error" not in kovaaks_data and kovaaks_data.get("scenarios_played"):
+            scenarios_data = kovaaks_data["scenarios_played"]
+            profile = kovaaks_data.get("profile", {})
+
+            # Extract scenarios from nested data structure
+            scenarios = scenarios_data.get("data", []) if isinstance(scenarios_data, dict) else scenarios_data
+
+            system_prompt += f"""
+KOVAAK'S API DATA (Live from user account):
+- Username: {profile.get('webapp', {}).get('username', 'Unknown') if isinstance(profile, dict) else 'Unknown'}
+- Total scenarios played: {scenarios_data.get('total', len(scenarios)) if isinstance(scenarios_data, dict) else len(scenarios)}
+
+TOP SCENARIOS (by plays):
+"""
+            for scenario in scenarios[:5]:
+                scenario_name = scenario.get('scenarioName', scenario.get('name', 'Unknown'))
+                plays = scenario.get('counts', {}).get('plays', scenario.get('plays', 0))
+                best_score = scenario.get('score', scenario.get('highScore', 0))
+                system_prompt += f"- {scenario_name}: {plays} plays, Best: {best_score:.1f}\n"
+
+            if kovaaks_data.get("recent_scores"):
+                system_prompt += f"\nRECENT HIGH SCORES:\n"
+                for score in kovaaks_data["recent_scores"][:3]:
+                    system_prompt += f"- {score.get('scenarioName', 'Unknown')}: {score.get('score', 0):.1f}\n"
+
+        # Fallback to local stats if KovaaK's API data not available
+        elif "error" not in context.get("local_stats", {}):
+            local_stats = context["local_stats"]
+            system_prompt += f"""
+LOCAL STATS (recent entries):
+- Average score: {local_stats.get('average_score', 0):.1f}
+- Total entries: {local_stats.get('total_entries', 0)}
+- Recent entries: {local_stats.get('recent_entries', 0)}
+
+TOP SCENARIOS:
 """
             for scenario in local_stats.get("top_scenarios", [])[:5]:
-                system_prompt += f"- {scenario['scenario_name']}: Meilleur score {scenario['best_score']:.1f}, Moyenne {scenario['avg_score']:.1f}, {scenario['plays']} parties\n"
-        
+                system_prompt += f"- {scenario['scenario_name']}: Best score {scenario['best_score']:.1f}, Average {scenario['avg_score']:.1f}, {scenario['plays']} plays\n"
+
         # Ajouter l'analyse
         analysis = context.get("analysis", {})
         if analysis.get("strengths"):
-            system_prompt += f"\nFORCES: {', '.join(analysis['strengths'])}\n"
-        
+            system_prompt += f"\nSTRENGTHS: {', '.join(analysis['strengths'])}\n"
+
         if analysis.get("weak_points"):
-            system_prompt += f"POINTS À AMÉLIORER: {', '.join(analysis['weak_points'])}\n"
-        
+            system_prompt += f"AREAS TO IMPROVE: {', '.join(analysis['weak_points'])}\n"
+
         if analysis.get("recommendations"):
-            system_prompt += f"RECOMMANDATIONS: {', '.join(analysis['recommendations'])}\n"
-        
+            system_prompt += f"RECOMMENDATIONS: {', '.join(analysis['recommendations'])}\n"
+
         system_prompt += """
 INSTRUCTIONS:
-- Donne des conseils personnalisés basés sur les stats
-- Propose des exercices spécifiques
-- Explique les techniques d'amélioration
-- Sois encourageant mais réaliste
-- Utilise des termes techniques appropriés pour KovaaK's
+- Provide personalized advice based on the user's stats above
+- When the user asks for routine recommendations, combine their stats with the training documents
+- Suggest specific exercises that target their weak points
+- Explain improvement techniques clearly
+- Be encouraging but realistic
+- Use appropriate technical terms for KovaaK's
+- If training documents are provided, prioritize routines that match the user's skill level and weaknesses
 """
-        
+
         return system_prompt
 
 def create_llm_context_builder() -> LLMContextBuilder:

@@ -11,12 +11,25 @@ export interface ChatMessage {
   timestamp: Date
   model_used?: string
   response_time?: number
+  rag_sources?: Array<{
+    title: string
+    content: string
+    relevance: number
+  }>
+  rag_confidence?: number
 }
 
 export interface ChatResponse {
   message: string
   model_used: string
   response_time: number
+  rag_used?: boolean
+  rag_sources?: Array<{
+    title: string
+    content: string
+    relevance: number
+  }>
+  rag_confidence?: number
 }
 
 export interface ConversationResponse {
@@ -78,7 +91,11 @@ export const api = {
   /**
    * Send a chat message and get AI response
    */
-  async sendMessage(message: string, includeUserContext: boolean = false): Promise<ChatResponse> {
+  async sendMessage(
+    message: string,
+    includeUserContext: boolean = false,
+    ragMode: 'off' | 'hybrid' | 'only' = 'hybrid'
+  ): Promise<ChatResponse> {
     const response = await fetch(`${API_BASE_URL}/api/chat/message`, {
       method: 'POST',
       headers: {
@@ -87,6 +104,7 @@ export const api = {
       body: JSON.stringify({
         message,
         include_user_context: includeUserContext,
+        rag_mode: ragMode,
       }),
     })
     return handleResponse<ChatResponse>(response)

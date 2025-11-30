@@ -1,7 +1,3 @@
-"""
-API endpoints pour les statistiques locales
-Gère l'upload CSV et l'affichage des stats locales
-"""
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Query, Response
 from typing import List, Optional
 import logging

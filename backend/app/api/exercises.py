@@ -1,7 +1,3 @@
-"""
-API endpoints pour les exercices KovaaK's
-Gère les exercices recommandés et les suggestions personnalisées
-"""
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from typing import List, Dict, Any, Optional
 import logging
@@ -15,7 +11,6 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/exercises", tags=["exercises"])
 
-# Seed data pour les exercices KovaaK's
 EXERCISES_DATA = [
     {
         "id": 1,
@@ -125,10 +120,8 @@ async def get_exercises(
     difficulty: Optional[str] = Query(None, regex="^(easy|medium|hard)$"),
     limit: int = Query(50, ge=1, le=100)
 ):
-    """Récupère la liste des exercices avec filtres optionnels"""
     exercises = EXERCISES_DATA.copy()
     
-    # Appliquer les filtres
     if aim_type:
         exercises = [ex for ex in exercises if ex["aim_type"] == aim_type]
     

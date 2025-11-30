@@ -14,7 +14,14 @@ class TextChunk:
 
 
 class PDFService:
-    def __init__(self, chunk_size: int = 500, chunk_overlap: int = 50):
+    def __init__(self, chunk_size: int = 1000, chunk_overlap: int = 200):
+        """
+        Initialize PDF service with chunking parameters
+
+        Args:
+            chunk_size: Size of each chunk in characters (increased to 1000 to keep sharecodes with routine names)
+            chunk_overlap: Overlap between chunks to maintain context
+        """
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
     

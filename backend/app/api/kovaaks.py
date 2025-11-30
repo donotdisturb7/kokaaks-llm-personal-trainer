@@ -1,7 +1,3 @@
-"""
-API endpoints pour l'intégration KovaaK's
-Expose les données KovaaK's avec cache Redis
-"""
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from typing import Optional, List
 import logging

@@ -1,6 +1,3 @@
-"""
-Services package - contient tous les services de l'application
-"""
 from .ollama_service import OllamaService, create_ollama_service
 from .groq_service import GroqService, create_groq_service
 from .llm_service import LLMService, create_llm_service

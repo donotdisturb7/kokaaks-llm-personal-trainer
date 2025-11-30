@@ -1,7 +1,3 @@
-"""
-API endpoints pour le contexte LLM
-Expose le contexte utilisateur formaté pour le LLM
-"""
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from typing import Dict, Any
 import logging

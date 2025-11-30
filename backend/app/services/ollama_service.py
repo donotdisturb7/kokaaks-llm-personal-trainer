@@ -1,7 +1,3 @@
-"""
-Service Ollama - Connexion modulaire pour localhost ou IP
-Gère la communication avec l'API Ollama pour l'IA
-"""
 import httpx
 from typing import Dict, Any, Optional, List
 from pydantic import BaseModel

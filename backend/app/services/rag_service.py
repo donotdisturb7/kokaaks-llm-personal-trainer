@@ -2,6 +2,8 @@
 RAG Service - Orchestrates retrieval and generation
 """
 from typing import List, Dict, Any, Optional
+import logging
+import traceback
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text, select
 
@@ -9,6 +11,8 @@ from app.models.rag import Document, DocumentChunk
 from app.services.embedding_service import EmbeddingService
 from app.services.llm_service import create_llm_service
 from app.config import settings
+
+logger = logging.getLogger(__name__)
 
 
 class RAGService:
@@ -76,35 +80,46 @@ class RAGService:
         safety_level: str = "general"
     ) -> List[Dict[str, Any]]:
         """Retrieve most relevant chunks using vector similarity"""
-        
-        # Build SQL query with vector similarity
-        sql = """
-        SELECT 
-            dc.id,
-            dc.content,
-            dc.chunk_metadata,
-            d.title,
-            d.doc_type,
-            d.topics,
-            d.safety,
-            1 - (dc.embedding <=> %s) as relevance
-        FROM rag_document_chunks dc
-        JOIN rag_documents d ON dc.document_id = d.id
-        WHERE d.safety = %s
-        """
-        
-        params = [query_embedding, safety_level]
-        
-        # Add topic filtering if specified
-        if topics:
-            sql += " AND d.topics ?| %s"
-            params.append(topics)
-        
-        sql += " ORDER BY dc.embedding <=> %s LIMIT %s"
-        params.extend([query_embedding, max_results])
 
-        result = await self.db.execute(text(sql), params)
-        chunks = []
+        try:
+            logger.info(f"Retrieving chunks with embedding type: {type(query_embedding)}, length: {len(query_embedding)}")
+
+            # Build query using raw SQL with proper vector formatting
+            # pgvector's SQLAlchemy integration has issues with parameter binding
+            embedding_str = '[' + ','.join(str(x) for x in query_embedding) + ']'
+
+            sql = f"""
+            SELECT
+                dc.id,
+                dc.content,
+                dc.chunk_metadata,
+                d.title,
+                d.doc_type,
+                d.topics,
+                d.safety,
+                1 - (dc.embedding <=> '{embedding_str}'::vector) as relevance
+            FROM rag_document_chunks dc
+            JOIN rag_documents d ON dc.document_id = d.id
+            WHERE d.safety = :safety_level
+            """
+
+            params = {"safety_level": safety_level, "max_results": max_results}
+
+            # Add topic filtering if specified
+            if topics:
+                # Convert topics list to PostgreSQL array format
+                topics_str = '{' + ','.join(f'"{t}"' for t in topics) + '}'
+                sql += f" AND d.topics ?| ARRAY{topics_str}"
+
+            sql += f" ORDER BY dc.embedding <=> '{embedding_str}'::vector LIMIT :max_results"
+
+            logger.info("Executing vector similarity query...")
+            result = await self.db.execute(text(sql), params)
+            chunks = []
+        except Exception as e:
+            logger.error(f"Error in _retrieve_chunks: {e}")
+            logger.error(traceback.format_exc())
+            raise
 
         for row in result:
             chunks.append({
@@ -115,7 +130,7 @@ class RAGService:
                 "topics": row.topics,
                 "relevance": float(row.relevance)
             })
-        
+
         return chunks
     
     def _compose_context(self, chunks: List[Dict[str, Any]]) -> str:

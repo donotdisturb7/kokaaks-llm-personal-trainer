@@ -1,7 +1,3 @@
-"""
-Modèles RAG (Retrieval Augmented Generation)
-Documents, chunks, et embeddings (pgvector)
-"""
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Index
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.sql import func
