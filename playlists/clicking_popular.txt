@@ -1,0 +1,56 @@
+# Clicking/Flicking - Précision sur cibles statiques/rapides - Scénarios populaires (50 scénarios)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 50
+# Total entries: 5,241,778
+# Moyenne entries: 104,835
+
+eth FP OGG Micro 60  # 146,290 players
+5 Sphere Hipfire Extra Small  # 144,000 players
+Tall Wall 6 (Distance)  # 141,545 players
+Tile Frenzy Flick 180 Small  # 140,671 players
+Valorant Vertical Flicks  # 138,975 players
+3 Tile Jumbo Tile Frenzy  # 138,866 players
+1w2ts reload smallflicks  # 138,760 players
+Clicking 3 Wide  # 138,627 players
+1wall2targets TE  # 131,130 players
+1wall5targets_pasu slow  # 129,308 players
+MrSavage patTS Shotgun FN  # 127,025 players
+1wall6targets CS2  # 124,190 players
+Pasu Voltaic Easy  # 120,159 players
+eth 1w4tes Micro  # 118,000 players
+1w4ts 30% larger  # 115,715 players
+VT Pasu Rasp Intermediate  # 114,480 players
+Clicking Bounce  # 113,000 players
+VT Pasu Novice S5  # 112,536 players
+VT Multiclick 120 Intermediate  # 111,876 players
+Pressure Aiming - 10 Targets  # 106,786 players
+1wall9000targets  # 105,522 players
+VT 1w4ts Novice S5  # 105,029 players
+Clicking Dodgy  # 102,072 players
+VT Popcorn Novice S5  # 101,455 players
+VT Bounceshot Intermediate  # 100,778 players
+VT 1w5ts Rasp Intermediate  # 99,952 players
+VT ww5t Novice S5  # 99,780 players
+GridShot 3x3  # 96,983 players
+Reflex Micro++ Flick  # 96,255 players
+VT Frogtagon Novice S5  # 94,615 players
+VT Floating Heads Novice S5  # 94,477 players
+B180 Voltaic Easy  # 93,682 players
+Target Switching 360 Static Thin  # 92,560 players
+Valorant Small Horizontal Flicks  # 91,094 players
+VariousStatic - THE FINALS  # 89,507 players
+patTargetClick 1shot  # 88,159 players
+fuglaaPressure  # 87,972 players
+Movement Clicking Bounce  # 87,463 players
+Popcorn Voltaic Easy  # 85,607 players
+VT AngleStrafe Intermediate  # 83,118 players
+RawMouseControl Reload  # 82,159 players
+Tile Frenzy - Strafing - 01  # 82,149 players
+VT Pasu Intermediate S5  # 82,117 players
+Growing Static CS2  # 80,745 players
+Reactive Clicking  # 79,694 players
+Pokeball Frenzy Auto Small  # 79,086 players
+VT Multiclick 180 Advanced  # 77,629 players
+1wall 6targets extra small  # 77,143 players
+VT PeekShot Valorant  # 76,840 players
+Reflex Flick - Hard  # 76,197 players

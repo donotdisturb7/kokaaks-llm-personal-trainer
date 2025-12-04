@@ -1,0 +1,35 @@
+# Dynamic - Scénarios dynamiques mixtes - Scénarios populaires (29 scénarios)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 29
+# Total entries: 488,900
+# Moyenne entries: 16,858
+
+Bounce 180  # 94,141 players
+Bounce 180 Manwing  # 81,204 players
+Floating Heads Timing 400% no mag  # 68,022 players
+Bounce 180 Reload  # 66,599 players
+Floating Heads Timing Easy  # 37,015 players
+Bounce 180 Sparky  # 35,978 players
+Bounce 180 Large  # 17,956 players
+Bounce 180 Nevermiss  # 13,594 players
+VSS Close Long 180  # 12,771 players
+Bounce 180 Sparky Easy  # 12,359 players
+Bounce 360T Sparky  # 11,574 players
+Floating Heads 50% HP 400%  # 10,544 players
+apa3's Bounce House  # 8,482 players
+Bounce 180 rAim  # 4,615 players
+bounce 90t  # 1,651 players
+Bounce 180 Logic  # 1,410 players
+Bounce 180 Large No Acc  # 1,378 players
+Close FSEI Extra Thin  # 1,312 players
+VSS Close Long Thin  # 1,114 players
+Close Long Needle Thin Invincible  # 1,048 players
+Bounce 180T easy  # 1,004 players
+Bounce 180 Nevermiss Easy  # 919 players
+Bounce Shotgun  # 858 players
+Charge Bounce 360  # 780 players
+Bounce 180 Hanzo  # 704 players
+fuglaaRainbowBounceFrozen  # 633 players
+Slide&Bounce Sheriff  # 464 players
+Bounce 180 High Ground  # 387 players
+Bounce 360T Sparky FN  # 384 players

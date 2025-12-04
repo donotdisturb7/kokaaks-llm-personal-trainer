@@ -1,7 +1,3 @@
-"""
-Configuration de l'application
-Gère les variables d'environnement et la configuration Ollama
-"""
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field, AliasChoices, field_validator
 from typing import List, Optional

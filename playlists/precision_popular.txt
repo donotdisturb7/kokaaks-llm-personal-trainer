@@ -1,0 +1,38 @@
+# Precision - Précision pure - Scénarios populaires (32 scénarios)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 32
+# Total entries: 521,564
+# Moyenne entries: 16,298
+
+6wall18targets small reload  # 82,581 players
+1 wall 6 targets Xsmall  # 80,620 players
+Wide Wall 3 Targets Small  # 37,736 players
+Wide wall 6 targets extra small  # 37,369 players
+ddtv xyz far veryslow small  # 36,684 players
+Wide Wall 4 Targets 30% Smaller  # 36,566 players
+B360TI Small Sparky  # 29,284 players
+ Wide Wall 10 Extra Small Moving  # 24,315 players
+Microshot 2 Targets (xx-small)  # 18,289 players
+various directions 5 hits small dots [1-shot]  # 16,280 players
+ddtv xyz mid veryslow small  # 16,191 players
+microshot 300ms long  # 14,666 players
+Bounce 180 small goated  # 14,602 players
+Microshot small 300ms  # 9,632 players
+beanTS 30% Smaller  # 7,393 players
+Wide Wall 2 Targets Extra Small  # 7,327 players
+Wide Wall 6Targets Small reload  # 7,079 players
+L180TI Small Sparky  # 6,827 players
+Pistol Strafe Gallery Sparky Small (good version)  # 5,500 players
+360 REGEN small  # 4,544 players
+Bounce 180 Sparky Smaller  # 4,343 players
+L180TI Extra Small Sparky  # 4,241 players
+wide wall 2targets small nodelay  # 3,313 players
+1 Wall 6 Targets Micro Small  # 2,894 players
+Leap 180 Reload Small Curved  # 2,494 players
+wide wall 2targets small  # 2,373 players
+B180TI Stupidly Small Sparky  # 2,056 players
+Bounce 360 Small  # 1,662 players
+1 wall 2 targets horizontal smaller  # 1,624 players
+Bounce 180 Sparky 3bot smaller  # 1,372 players
+Wide Wall 3 Targets Small FN  # 1,327 players
+Bounce 180 Reload Small 60s  # 380 players

@@ -1,7 +1,3 @@
-"""
-Service pour construire le contexte pour le LLM
-Agrège les données KovaaK's API et stats locales
-"""
 from typing import Dict, Any, List, Optional
 import logging
 from datetime import datetime, timedelta

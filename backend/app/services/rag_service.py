@@ -1,6 +1,3 @@
-"""
-RAG Service - Orchestrates retrieval and generation
-"""
 from typing import List, Dict, Any, Optional
 import logging
 import traceback

@@ -1,0 +1,56 @@
+# Autres scénarios populaires non catégorisés (50 scénarios)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 50
+# Total entries: 1,662,541
+# Moyenne entries: 33,250
+
+Thin Gauntlet  # 124,631 players
+POPCORN  # 95,242 players
+beanTS  # 92,968 players
+Centering I Easy  # 88,350 players
+Valorant peek training ( MCA-9 )  # 85,267 players
+LG Pin Practice 360  # 84,932 players
+patTargetSG TPS Crouch  # 74,416 players
+Thin Gauntlet Easy  # 61,090 players
+VT AntiCentering Valorant  # 53,872 players
+kinTS NR Easy  # 53,521 players
+VT PulseShot Valorant  # 52,165 players
+VT AngleShot Micro Valorant  # 50,629 players
+kinTS NR  # 50,319 players
+patTargetShotgun  # 48,744 players
+LDDH Fixed  # 47,877 players
+FuglaaXYVert  # 36,675 players
+Aimer VS Robots Easy  # 35,583 players
+B180TI Goated  # 33,994 players
+Ground Plaza Sparky v3 Invincible 6  # 32,900 players
+voxTS rAim Easy  # 28,016 players
+Ground Plaza Easy  # 26,830 players
+Ground Plaza invincible 2  # 26,671 players
+Fortnite Shotgun  # 26,535 players
+Aimer VS Robots Valorant  # 25,427 players
+VALORANT 360 AIM TRAINING  # 25,405 players
+Apex Gun Training  # 24,900 players
+Ground Plaza Sparky v3 Invincible 5  # 21,872 players
+Shotgun + SMG Swap 50'50  # 19,995 players
+fuglaab180t  # 17,804 players
+1 wall 6 targets Micro++  # 16,575 players
+devTS Goated NR  # 13,998 players
+L180TI Sparky  # 13,716 players
+Ground Plaza  # 12,566 players
+1 Wall 6 targets Adjust  # 12,200 players
+180 muscle memory  # 11,768 players
+Fortnite Gliders 360  # 11,262 players
+Ground Plaza Sparky v3 Invincible 2  # 10,755 players
+(Solo vs Squad) Apex Legends - Advanced Aim Training Series  # 10,523 players
+Pressure Aiming-5 Targets  # 10,026 players
+Buff Robots 360  # 9,924 players
+1 wall 2 targets horizontal  # 8,869 players
+Fortnite Gliders 360 Invincible  # 8,696 players
+Popcorn Goated rAim  # 8,633 players
+ww4ts v3  # 8,453 players
+SHIM shimPressure Level 2  # 8,357 players
+Thin Gauntlet V2 Thin Goated  # 8,223 players
+Aimbotz_R6  # 8,081 players
+shim6hipfire  # 7,815 players
+Thin Aiming Long Invincible Easy  # 7,736 players
+Shooting while falling 30 Targets  # 7,735 players

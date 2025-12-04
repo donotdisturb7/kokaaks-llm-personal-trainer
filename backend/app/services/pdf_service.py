@@ -19,7 +19,7 @@ class PDFService:
         Initialize PDF service with chunking parameters
 
         Args:
-            chunk_size: Size of each chunk in characters (increased to 1000 to keep sharecodes with routine names)
+            chunk_size: Size of each chunk in characters 
             chunk_overlap: Overlap between chunks to maintain context
         """
         self.chunk_size = chunk_size

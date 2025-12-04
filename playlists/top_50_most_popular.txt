@@ -1,0 +1,56 @@
+# Top 50 scénarios les plus populaires (par nombre de joueurs)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 50
+# Total entries: 6,468,836
+# Moyenne entries: 129,376
+
+Close Fast Strafes Easy Invincible  # 146,843 players
+eth FP OGG Micro 60  # 146,290 players
+iiTzTimmy - Ascended Tracking 90 Invincible  # 146,088 players
+iiTzTimmy - Amphi LG 1v1 Easy  # 145,686 players
+5 Sphere Hipfire Extra Small  # 144,000 players
+Humanoid Strafe  # 143,991 players
+Bounce 180 Sparky Jumbo  # 143,175 players
+Tall Wall 6 (Distance)  # 141,545 players
+Smoothness Trainer  # 141,180 players
+Air Invincible 2  # 140,968 players
+Tile Frenzy Flick 180 Small  # 140,671 players
+Valorant Vertical Flicks  # 138,975 players
+3 Tile Jumbo Tile Frenzy  # 138,866 players
+1w2ts reload smallflicks  # 138,760 players
+Clicking 3 Wide  # 138,627 players
+Air Angelic 4 Voltaic Easy  # 136,445 players
+SYW (Smooth Your Wrist)  # 134,902 players
+voxTS Voltaic  # 134,529 players
+patTargetSwitch Small No Reload  # 133,607 players
+patTargetSwitch  # 133,091 players
+Bounce 180 Tracking  # 132,442 players
+waldoTS  # 132,350 players
+1wall2targets TE  # 131,130 players
+Revolving Tracking  # 129,408 players
+Ground Tracking  # 129,379 players
+1wall5targets_pasu slow  # 129,308 players
+Fountain Track Fortnite  # 128,243 players
+MrSavage patTS Shotgun FN  # 127,025 players
+Bounce 180 Tracking Large Slower TTK  # 126,132 players
+Smoothbot Voltaic Easy  # 125,947 players
+Kindaclose Fast Strafes  # 125,590 players
+Smoothbot Click CRIT  # 125,017 players
+Thin Gauntlet  # 124,631 players
+1wall6targets CS2  # 124,190 players
+voxTargetSwitch  # 123,752 players
+Thin Aiming Long Invincible  # 123,750 players
+GP Far Long Strafes Easy  # 120,339 players
+Pasu Voltaic Easy  # 120,159 players
+Overwatch 2 - Ground Tracking  # 119,121 players
+eth 1w4tes Micro  # 118,000 players
+VSS GP9  # 117,880 players
+Air Tracking 180  # 116,272 players
+1w4ts 30% larger  # 115,715 players
+Strafes and Jumps Robot Low Ground  # 115,644 players
+KindaClose Fast Strafes Robot  # 115,038 players
+VT Pasu Rasp Intermediate  # 114,480 players
+Clicking Bounce  # 113,000 players
+VT Pasu Novice S5  # 112,536 players
+Smooth Tracking a+ Easy  # 112,243 players
+VT Multiclick 120 Intermediate  # 111,876 players

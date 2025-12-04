@@ -12,7 +12,6 @@ class EmbeddingService:
     async def _ensure_model_loaded(self):
         """Lazy load the embedding model"""
         if not self._model_loaded:
-            # Run in thread pool to avoid blocking
             loop = asyncio.get_event_loop()
             self.model = await loop.run_in_executor(
                 None, 

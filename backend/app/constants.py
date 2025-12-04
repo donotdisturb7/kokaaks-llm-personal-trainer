@@ -1,7 +1,3 @@
-"""
-Application-wide constants
-Centralized location for magic numbers and reusable strings
-"""
 
 # ============================================================================
 # Vector Database Constants

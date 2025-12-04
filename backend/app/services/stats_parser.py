@@ -1,7 +1,3 @@
-"""
-Service pour parser les fichiers CSV de statistiques KovaaK's
-Gère l'upload et l'import des données locales
-"""
 import pandas as pd
 import io
 from typing import List, Dict, Any, Optional

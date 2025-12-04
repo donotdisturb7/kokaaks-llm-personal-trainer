@@ -1,0 +1,56 @@
+# Target Switching - Changement rapide entre cibles - Scénarios populaires (50 scénarios)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 50
+# Total entries: 3,912,192
+# Moyenne entries: 78,243
+
+Bounce 180 Sparky Jumbo  # 143,175 players
+voxTS Voltaic  # 134,529 players
+patTargetSwitch Small No Reload  # 133,607 players
+patTargetSwitch  # 133,091 players
+Fountain Track Fortnite  # 128,243 players
+voxTargetSwitch  # 123,752 players
+Fortnite Bounce 180 Track Low Ground  # 105,700 players
+Switching Humanoid  # 98,260 players
+Pokeball 1w4ts 30%  # 95,165 players
+Switching Spheres  # 93,390 players
+VT FlyTS Novice S5  # 90,524 players
+VT DotTS Novice S5  # 88,610 players
+VT EddieTS Novice S5  # 84,846 players
+Houston Outlaws - Target Switching  # 84,638 players
+VT skyTS Intermediate  # 83,495 players
+VT DriftTS Novice S5  # 82,643 players
+VT ControlTS Novice S5  # 82,291 players
+HeadClick Altered  # 81,304 players
+VT Penta Bounce Novice S5  # 81,233 players
+Pokeball Frenzy Auto 1w2ts  # 80,628 players
+VT psalmTS Intermediate  # 79,302 players
+Controlsphere Easy  # 75,917 players
+VT evaTS Intermediate  # 74,688 players
+voxTargetSwitch 2  # 74,422 players
+VT bounceTS Intermediate  # 74,102 players
+KinTS Low Ground Easy  # 71,953 players
+tamTargetSwitch Control Hard  # 70,849 players
+Horizontal Switch CS2  # 67,885 players
+Pokeball Frenzy Auto Small Wide  # 67,144 players
+patTS Voltaic Easy  # 66,789 players
+Pokeball Frenzy Auto 1w4ts  # 65,463 players
+voxTS Voltaic Easy  # 65,079 players
+Aimerz+ Week #5 - Static Switching  # 63,501 players
+VT FlyTS Intermediate S5  # 63,291 players
+Pokeball ww3t Voltaic Iron  # 62,963 players
+VT DotTS Intermediate S5  # 61,586 players
+Pokeball Frenzy Auto Wide Wall 4 Targets Small  # 61,423 players
+patTargetSwitch easy  # 61,410 players
+B180T Voltaic Easy  # 61,374 players
+patTargetSwitch 90 easy  # 60,190 players
+VarClick Valorant  # 59,346 players
+VT EddieTS Intermediate S5  # 55,959 players
+psalmTS Voltaic  # 54,683 players
+TamTS Warzone  # 53,135 players
+psalmTS Voltaic Easy  # 52,753 players
+VT ControlTS Intermediate S5  # 52,286 players
+VT DriftTS Intermediate S5  # 51,802 players
+VT Penta Bounce Intermediate S5  # 51,309 players
+patCircleSwitch NR  # 51,243 players
+Skeet Tracking Goated  # 51,221 players

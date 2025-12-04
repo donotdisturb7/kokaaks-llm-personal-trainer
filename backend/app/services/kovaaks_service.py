@@ -7,7 +7,6 @@ from app.services.cache_service import CacheService
 logger = logging.getLogger(__name__)
 
 class KovaaksService:
-    """Service pour interagir avec l'API KovaaK's via proxy avec cache Redis"""
     
     def __init__(self):
         # Utiliser le proxy qui utilise le wrapper officiel

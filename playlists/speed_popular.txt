@@ -1,0 +1,38 @@
+# Speed - Vitesse et réactivité - Scénarios populaires (32 scénarios)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 32
+# Total entries: 702,411
+# Moyenne entries: 21,950
+
+Valorant Microshot Speed Small  # 110,012 players
+Microshot Speed  # 89,502 players
+Midrange Fast Strafes V2  # 78,737 players
+Close Fast Strafes Easy Shotgun Invincible  # 66,674 players
+[MCA-8] Auto Balanced Fast Strafes  # 42,423 players
+CowserTS speed  # 40,962 players
+Close Fast Strafes Invincible - Thin  # 39,322 players
+Midrange Fast Strafes Invincible  # 38,906 players
+Close Fast Strafes Easy Thin Shotgun  # 37,056 players
+Close Fast Strafes Easy  # 33,009 players
+Close Fast Strafes Buff Robot  # 19,412 players
+Close Fast Strafes  # 15,395 players
+Cata IC Fast Strafes Invincible  # 14,013 players
+[70%] Close Fast Strafes Easy Invincible  # 9,309 players
+Close Long Strafes Invincible FASTER  # 9,279 players
+Microshot Speed v2  # 9,227 players
+Microshot Speed 2targets  # 8,966 players
+Close fast strafes 180 30s  # 6,727 players
+Close Fast Strafes Sparky 50% Faster  # 6,263 players
+Bounce 180 Sparky Speed  # 6,225 players
+Circle Strafes Fast  # 5,130 players
+fuglaaXY Reactive rAim Easy  # 4,349 players
+Close Fast Thin Strafes Invincible  # 2,189 players
+Close Fast Strafes Thin  # 1,696 players
+Cata IC Fast Strafes Thin  # 1,567 players
+ Midrange Fast Strafes Invincible Headshot Jump  # 1,272 players
+Close Fast Strafes Invincible Thin OW  # 1,149 players
+Thin Fast Strafes Invincible  # 1,008 players
+Thin Aiming Long Invincible Fast  # 876 players
+reactive adjust  # 841 players
+Close Fast Strafes Hard Invincible Extra Thin  # 765 players
+[70%] Close Fast Strafes Invincible  # 150 players

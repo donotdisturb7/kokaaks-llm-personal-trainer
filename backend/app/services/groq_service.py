@@ -10,13 +10,12 @@ logger = logging.getLogger(__name__)
 
 
 class GroqMessage(BaseModel):
-    """Modèle pour un message dans la conversation"""
+   
     role: str  # "user", "assistant" ou "system"
     content: str
 
 
 class GroqService:
-    """Service pour interagir avec Groq via OpenAI SDK"""
     
     def __init__(self, settings: Settings):
         self.settings = settings
@@ -27,11 +26,9 @@ class GroqService:
         self.model = settings.groq_model
         
     async def __aenter__(self):
-        """Context manager entry"""
         return self
         
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        """Context manager exit"""
         await self.client.close()
     
     async def health_check(self) -> bool:

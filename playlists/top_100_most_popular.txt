@@ -1,0 +1,106 @@
+# Top 100 scénarios les plus populaires (par nombre de joueurs)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 100
+# Total entries: 11,412,448
+# Moyenne entries: 114,124
+
+Close Fast Strafes Easy Invincible  # 146,843 players
+eth FP OGG Micro 60  # 146,290 players
+iiTzTimmy - Ascended Tracking 90 Invincible  # 146,088 players
+iiTzTimmy - Amphi LG 1v1 Easy  # 145,686 players
+5 Sphere Hipfire Extra Small  # 144,000 players
+Humanoid Strafe  # 143,991 players
+Bounce 180 Sparky Jumbo  # 143,175 players
+Tall Wall 6 (Distance)  # 141,545 players
+Smoothness Trainer  # 141,180 players
+Air Invincible 2  # 140,968 players
+Tile Frenzy Flick 180 Small  # 140,671 players
+Valorant Vertical Flicks  # 138,975 players
+3 Tile Jumbo Tile Frenzy  # 138,866 players
+1w2ts reload smallflicks  # 138,760 players
+Clicking 3 Wide  # 138,627 players
+Air Angelic 4 Voltaic Easy  # 136,445 players
+SYW (Smooth Your Wrist)  # 134,902 players
+voxTS Voltaic  # 134,529 players
+patTargetSwitch Small No Reload  # 133,607 players
+patTargetSwitch  # 133,091 players
+Bounce 180 Tracking  # 132,442 players
+waldoTS  # 132,350 players
+1wall2targets TE  # 131,130 players
+Revolving Tracking  # 129,408 players
+Ground Tracking  # 129,379 players
+1wall5targets_pasu slow  # 129,308 players
+Fountain Track Fortnite  # 128,243 players
+MrSavage patTS Shotgun FN  # 127,025 players
+Bounce 180 Tracking Large Slower TTK  # 126,132 players
+Smoothbot Voltaic Easy  # 125,947 players
+Kindaclose Fast Strafes  # 125,590 players
+Smoothbot Click CRIT  # 125,017 players
+Thin Gauntlet  # 124,631 players
+1wall6targets CS2  # 124,190 players
+voxTargetSwitch  # 123,752 players
+Thin Aiming Long Invincible  # 123,750 players
+GP Far Long Strafes Easy  # 120,339 players
+Pasu Voltaic Easy  # 120,159 players
+Overwatch 2 - Ground Tracking  # 119,121 players
+eth 1w4tes Micro  # 118,000 players
+VSS GP9  # 117,880 players
+Air Tracking 180  # 116,272 players
+1w4ts 30% larger  # 115,715 players
+Strafes and Jumps Robot Low Ground  # 115,644 players
+KindaClose Fast Strafes Robot  # 115,038 players
+VT Pasu Rasp Intermediate  # 114,480 players
+Clicking Bounce  # 113,000 players
+VT Pasu Novice S5  # 112,536 players
+Smooth Tracking a+ Easy  # 112,243 players
+VT Multiclick 120 Intermediate  # 111,876 players
+Midrange Long Strafes Invincible  # 110,528 players
+Valorant Microshot Speed Small  # 110,012 players
+VT Smoothbot Intermediate  # 109,659 players
+Centering 90 Easy+ No Strafes  # 108,921 players
+Aimerz+ Week #7 - Suavetrack  # 107,834 players
+PGTI Voltaic Easy  # 107,389 players
+Pressure Aiming - 10 Targets  # 106,786 players
+VT PGT Novice S5  # 106,143 players
+Kindaclose Long Strafes  # 105,761 players
+Fortnite Bounce 180 Track Low Ground  # 105,700 players
+1wall9000targets  # 105,522 players
+VT Snake Track Novice S5  # 105,344 players
+VT 1w4ts Novice S5  # 105,029 players
+Vertical Long Strafes  # 104,895 players
+GP Close Long Strafes Easy  # 103,528 players
+Smooth Vertical Tracking  # 102,343 players
+Clicking Dodgy  # 102,072 players
+VT Popcorn Novice S5  # 101,455 players
+Ascended Tracking 90 Smooth  # 101,379 players
+VT Bounceshot Intermediate  # 100,778 players
+mccoyfrozentrack  # 100,740 players
+Smooth Tracking  # 100,572 players
+VT 1w5ts Rasp Intermediate  # 99,952 players
+VT ww5t Novice S5  # 99,780 players
+Switching Humanoid  # 98,260 players
+High Ground Tracking a+ Easy  # 97,030 players
+GridShot 3x3  # 96,983 players
+Reflex Micro++ Flick  # 96,255 players
+Movement Tracking  # 95,709 players
+Manwing Strafe Gallery V3 Robots  # 95,464 players
+POPCORN  # 95,242 players
+Pokeball 1w4ts 30%  # 95,165 players
+Centering 90 Easy No Strafes  # 95,041 players
+VT Frogtagon Novice S5  # 94,615 players
+VT Floating Heads Novice S5  # 94,477 players
+Bounce 180  # 94,141 players
+B180 Voltaic Easy  # 93,682 players
+Switching Spheres  # 93,390 players
+beanTS  # 92,968 players
+Air Invincible  # 92,655 players
+Ascended Tracking 90  # 92,632 players
+Target Switching 360 Static Thin  # 92,560 players
+VT Raw Control Novice S5  # 91,755 players
+Tile Frenzy 180 Strafing 400Prct Track  # 91,214 players
+Valorant Small Horizontal Flicks  # 91,094 players
+VT Aether Novice S5  # 90,852 players
+VT Ground Novice S5  # 90,602 players
+VT FlyTS Novice S5  # 90,524 players
+VT Controlsphere Novice S5  # 89,673 players
+VariousStatic - THE FINALS  # 89,507 players

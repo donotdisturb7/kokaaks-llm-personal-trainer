@@ -1,7 +1,3 @@
-"""
-Service de cache Redis pour optimiser les performances
-Gère le cache des données KovaaK's et du contexte LLM
-"""
 from typing import Optional, Any
 import json
 import logging

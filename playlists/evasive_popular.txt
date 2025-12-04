@@ -1,0 +1,54 @@
+# Evasive - Mouvement et esquive - Scénarios populaires (48 scénarios)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 48
+# Total entries: 1,371,204
+# Moyenne entries: 28,566
+
+Strafes and Jumps Robot Low Ground  # 115,644 players
+Midrange Long Strafes Invincible  # 110,528 players
+Centering 90 Easy+ No Strafes  # 108,921 players
+Vertical Long Strafes  # 104,895 players
+Manwing Strafe Gallery V3 Robots  # 95,464 players
+Centering 90 Easy No Strafes  # 95,041 players
+Close Long Strafes  # 86,453 players
+gp far long strafes  # 62,647 players
+Kindafar Long Strafes  # 61,664 players
+Centering I 90 no strafes  # 49,963 players
+fuglaaXYShortstrafes  # 46,696 players
+Pistol Strafe Gallery Sparky  # 40,351 players
+RexStrafesCata  # 35,498 players
+Cata IC Long Strafes Invincible  # 28,425 players
+RexStrafesCata Invincible  # 27,572 players
+Midrange Short Strafes Invincible Raspberry  # 26,612 players
+Midrange Long Strafes Thin Invincible  # 23,805 players
+Manwing Strafe Gallery V3  # 21,818 players
+[MCA-5] Auto Balanced Long Strafes  # 18,811 players
+Centering II 180 no strafes easier  # 18,212 players
+Midrange Long Strafes V2  # 17,282 players
+Centering I 180 no strafes easier  # 15,534 players
+raspStrafes 360 Easy  # 14,858 players
+Close Long Strafes 30s  # 13,231 players
+Close Long Strafes Invincible 180  # 12,418 players
+Cycle Strafes Long  # 11,238 players
+fuglaaXYLongstrafesINSANE  # 11,091 players
+Midrange Long Strafes  # 9,615 players
+Unpredictable Strafes  # 8,082 players
+fuglaaXYShortstrafes Easy  # 7,664 players
+Cata Plasma Long Strafes  # 7,410 players
+close long strafes invincible easy  # 7,274 players
+Circle Strafes Long Varied Easy  # 6,370 players
+Cata IC Long Strafes Thin  # 5,911 players
+Close Long Strafes Headshot  # 5,761 players
+Cycle Strafes Mid Varied Easy  # 5,671 players
+Far Long Strafes Thin  # 5,388 players
+Centering II 90 no strafes  # 5,301 players
+3D Mid Dodge  # 5,204 players
+Narrow Strafe -R99-  # 5,144 players
+DodgeyV4 Unvincible  # 4,070 players
+Bounce 180 Dodge  # 2,385 players
+Thin Long Strafes Invincible  # 2,342 players
+Kindaclose Mid Strafes Thin  # 1,008 players
+Midrange Long Strafes Extra Thin Invincible  # 780 players
+Close Long Strafes Thin  # 764 players
+Aimer7 - Beginner - 01 - Close Long Strafes  # 234 players
+Aimer7 - Beginner - 03 - FuglaaXYLongStrafe  # 154 players

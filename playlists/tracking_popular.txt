@@ -1,0 +1,56 @@
+# Tracking - Suivi de cibles en mouvement - Scénarios populaires (50 scénarios)
+# Généré le 2025-11-05 14:59:23
+# Nombre de scénarios: 50
+# Total entries: 5,580,736
+# Moyenne entries: 111,614
+
+Close Fast Strafes Easy Invincible  # 146,843 players
+iiTzTimmy - Ascended Tracking 90 Invincible  # 146,088 players
+iiTzTimmy - Amphi LG 1v1 Easy  # 145,686 players
+Humanoid Strafe  # 143,991 players
+Smoothness Trainer  # 141,180 players
+Air Invincible 2  # 140,968 players
+Air Angelic 4 Voltaic Easy  # 136,445 players
+SYW (Smooth Your Wrist)  # 134,902 players
+Bounce 180 Tracking  # 132,442 players
+waldoTS  # 132,350 players
+Revolving Tracking  # 129,408 players
+Ground Tracking  # 129,379 players
+Bounce 180 Tracking Large Slower TTK  # 126,132 players
+Smoothbot Voltaic Easy  # 125,947 players
+Kindaclose Fast Strafes  # 125,590 players
+Smoothbot Click CRIT  # 125,017 players
+Thin Aiming Long Invincible  # 123,750 players
+GP Far Long Strafes Easy  # 120,339 players
+Overwatch 2 - Ground Tracking  # 119,121 players
+VSS GP9  # 117,880 players
+Air Tracking 180  # 116,272 players
+KindaClose Fast Strafes Robot  # 115,038 players
+Smooth Tracking a+ Easy  # 112,243 players
+VT Smoothbot Intermediate  # 109,659 players
+Aimerz+ Week #7 - Suavetrack  # 107,834 players
+PGTI Voltaic Easy  # 107,389 players
+VT PGT Novice S5  # 106,143 players
+Kindaclose Long Strafes  # 105,761 players
+VT Snake Track Novice S5  # 105,344 players
+GP Close Long Strafes Easy  # 103,528 players
+Smooth Vertical Tracking  # 102,343 players
+Ascended Tracking 90 Smooth  # 101,379 players
+mccoyfrozentrack  # 100,740 players
+Smooth Tracking  # 100,572 players
+High Ground Tracking a+ Easy  # 97,030 players
+Movement Tracking  # 95,709 players
+Air Invincible  # 92,655 players
+Ascended Tracking 90  # 92,632 players
+VT Raw Control Novice S5  # 91,755 players
+Tile Frenzy 180 Strafing 400Prct Track  # 91,214 players
+VT Aether Novice S5  # 90,852 players
+VT Ground Novice S5  # 90,602 players
+VT Controlsphere Novice S5  # 89,673 players
+VT PatStrafe Intermediate  # 89,323 players
+Fountain Tracking - Easy  # 88,735 players
+Smooth Thin Strafes Raspberry Easy  # 88,338 players
+Pasu Track Smooth  # 87,497 players
+Close Fast Strafes Invincible  # 87,005 players
+Air Angelic 4 Voltaic  # 85,026 players
+Overwatch 2 - Vertical Tracking  # 84,987 players
