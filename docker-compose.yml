@@ -107,6 +107,11 @@ services:
     environment:
       - DATABASE_URL=postgresql+asyncpg://kovaaks:kovaaks_pass@postgres:5432/kovaaks_ai
       - REDIS_URL=redis://redis:6379/0
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=kovaaks
+      - POSTGRES_PASSWORD=kovaaks_pass
+      - POSTGRES_DB=kovaaks_ai
       - LLM_PROVIDER=${LLM_PROVIDER:-groq}
       - GROQ_API_KEY=${GROQ_API_KEY}
       - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}

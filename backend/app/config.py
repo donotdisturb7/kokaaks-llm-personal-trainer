@@ -33,8 +33,15 @@ class Settings(BaseSettings):
     )
     
     # Configuration Base de données
-    database_url: str = "postgresql+asyncpg://kovaaks:kovaaks_pass@localhost:5434/kovaaks_ai"
+    database_url: str = "postgresql+asyncpg://kovaaks:kovaaks_pass@localhost:5436/kovaaks_ai"
     database_echo: bool = False
+
+    # PostgreSQL configuration (pour PGVector / LangChain)
+    postgres_host: str = "localhost"
+    postgres_port: int = 5436
+    postgres_user: str = "kovaaks"
+    postgres_password: str = "kovaaks_pass"
+    postgres_db: str = "kovaaks_ai"
     
     # Configuration Redis
     redis_url: str = "redis://localhost:6379/0"

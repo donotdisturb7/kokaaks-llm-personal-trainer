@@ -15,3 +15,11 @@ pgvector>=0.2.5
 fastembed>=0.2.7
 PyMuPDF>=1.24.9
 pandas>=2.2.0
+
+# LangChain dependencies (using 0.2.x for stability)
+langchain==0.2.16
+langchain-community==0.2.16
+langchain-groq==0.1.9
+langchain-postgres==0.0.9
+
+
